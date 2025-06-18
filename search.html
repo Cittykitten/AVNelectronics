@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVN Electronics - Premium Audio-Visual & Smart Home Technology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Search Results - AVN Electronics</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <i class="fas fa-tv"></i>
+                <span>AVN Electronics</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="categories.html">Categories</a>
+                <a href="deals.html">Deals</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <!-- Replace your search icon with this -->
+                <div class="header-search-container">
+                    <form id="header-search-form" class="header-search-form">
+                        <input type="text" id="header-search-input" class="header-search-input" 
+                            placeholder="Search products..." autocomplete="off">
+                        <button type="submit" class="header-search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <div class="search-suggestions"></div>
+                    </form>
+                </div>
+                <i class="fas fa-user"></i>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">3</span>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <a href="#" class="logo">
+                <i class="fas fa-tv"></i>
+                <span>AVN Electronics</span>
+            </a>
+            <button class="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="deals.html">Deals</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="mobile-nav-actions">
+            <a href="#" class="btn">Login</a>
+            <a href="#" class="btn btn-outline">Register</a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+
+    <main class="search-results-container">
+        <div class="search-results-header">
+            <h1>Search Results for "<span id="search-query"></span>"</h1>
+            <p id="results-count"></p>
+        </div>
+
+        <div class="search-filters">
+            <div class="filter-group">
+                <label>Category:</label>
+                <select id="category-filter">
+                    <option value="all">All Categories</option>
+                    <option value="tvs">Smart TVs</option>
+                    <option value="audio">Audio Systems</option>
+                    <option value="smart-home">Smart Home</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="search-results" class="products-grid">
+        </div>
+
+        <div class="no-results" style="display: none;">
+            <i class="fas fa-search fa-3x"></i>
+            <h3>No products found</h3>
+            <p>Try different search terms or browse our <a href="shop.html">products</a></p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>AVN Electronics</h3>
+                <p>Innovating the future of home entertainment and smart technology since 2010.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="smarttvs.html">Smart TVs</a></li>
+                    <li><a href="audio.html">Audio Systems</a></li>
+                    <li><a href="smarthome.html">Smart Home</a></li>
+                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="deals.html">Deals</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="shippingpolicy.html">Shipping Policy</a></li>
+                    <li><a href="warranty.html">Returns & Warranty</a></li>
+                    <li><a href="manual.html">Product Manuals</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="press.html">Press</a></li>
+                    <li><a href="investors.html">Investors</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 AVN Electronics. All rights reserved. | <a href="privacypolicy.html">Privacy Policy</a> | <a href="termsofservice.html">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q');
+            document.getElementById('search-query').textContent = query;
+
+
+            fetchSearchResults(query);
+        });
+
+        function fetchSearchResults(query) {
+            // API call with timeout
+            setTimeout(() => {
+                // actual API call:
+                // fetch(`/api/search?q=${encodeURIComponent(query)}`)
+                //     .then(response => response.json())
+                //     .then(data => displayResults(data));
+
+                //using filtered sample data; demo
+                const allProducts = [
+                    { id: 1, name: "Quantum X Series TV", model: "QX-65UHD", category: "tvs", price: 1299.99, image: "https://via.placeholder.com/300" },
+                    { id: 2, name: "Crystal 4K HDR TV", model: "CR-55HDR", category: "tvs", price: 899.99, image: "https://via.placeholder.com/300" },
+                    { id: 3, name: "Surround 7.1 Audio System", model: "SR-7100", category: "audio", price: 499.99, image: "https://via.placeholder.com/300" }
+                ];
+
+                const filtered = allProducts.filter(product => 
+                    product.name.toLowerCase().includes(query.toLowerCase()) || 
+                    product.model.toLowerCase().includes(query.toLowerCase())
+                );
+
+                displayResults(filtered);
+            }, 500);
+        }
+
+        function displayResults(products) {
+            const resultsContainer = document.getElementById('search-results');
+            const noResults = document.querySelector('.no-results');
+            const resultsCount = document.getElementById('results-count');
+
+            if (products.length === 0) {
+                resultsContainer.style.display = 'none';
+                noResults.style.display = 'block';
+                resultsCount.textContent = '0 results found';
+                return;
+            }
+
+            resultsCount.textContent = `${products.length} ${products.length === 1 ? 'result' : 'results'} found`;
+            noResults.style.display = 'none';
+            resultsContainer.style.display = 'grid';
+
+            resultsContainer.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <h4 class="product-name">${product.name}</h4>
+                    <p class="product-model">${product.model}</p>
+                    <p class="product-price">$${product.price.toFixed(2)}</p>
+                    <a href="product.html?id=${product.id}" class="view-product">View Product</a>
+                </div>
+            `).join('');
+        }
+
+        // Filter functionality
+        document.getElementById('category-filter').addEventListener('change', function() {
+            const category = this.value;
+            const query = new URLSearchParams(window.location.search).get('q');
+            
+            if (category === 'all') {
+                fetchSearchResults(query);
+            } else {
+                // Filter by category (in a real app, this would be an API call)
+                fetchSearchResults(query).then(products => {
+                    const filtered = products.filter(p => p.category === category);
+                    displayResults(filtered);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

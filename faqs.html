@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - AVN Electronics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --red: #ef4444;
+            --green: #10b981;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-actions i {
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-actions i:hover {
+            color: var(--primary);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--red);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Main Content */
+        .faq-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        /* Hero Section */
+        .faq-hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .faq-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .faq-hero p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Search Section */
+        .search-section {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .search-form {
+            display: flex;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 0.3rem 0 0 0.3rem;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+        }
+
+        .search-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 0.3rem 0.3rem 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* FAQ Content */
+        .faq-content {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .faq-category {
+            margin-bottom: 3rem;
+        }
+
+        .faq-category h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border: 1px solid #eee;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-item.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 1px var(--primary);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background-color: #f8fafc;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background-color: #f1f5f9;
+        }
+
+        .faq-question i {
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 1.5rem;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer ul, .faq-answer ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .note-box {
+            background-color: #f0f9ff;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 0.3rem 0.3rem 0;
+        }
+
+        .warning-box {
+            background-color: #fef2f2;
+            border-left: 4px solid var(--red);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 0.3rem 0.3rem 0;
+        }
+
+        .note-box p, .warning-box p {
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .contact-prompt {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: #f8fafc;
+            border-radius: 0.5rem;
+        }
+
+        .contact-prompt h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .contact-prompt p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 0.3rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .contact-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 350px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            transition: var(--transition);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: block;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--primary);
+            padding-left: 10px;
+        }
+
+        .mobile-nav-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Footer */
+        footer {
+            background-color: white;
+            padding: 4rem 2rem 2rem;
+            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .footer-column p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            text-decoration: none;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .faq-container {
+                padding-top: 6rem;
+            }
+
+            .faq-content {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .faq-hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .search-form {
+                flex-direction: column;
+            }
+
+            .search-input {
+                border-radius: 0.3rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .search-btn {
+                border-radius: 0.3rem;
+                padding: 0.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .logo i {
+                font-size: 1.7rem;
+            }
+
+            .faq-container {
+                padding: 5rem 1rem 3rem;
+            }
+
+            .faq-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .faq-content {
+                padding: 1.5rem;
+            }
+
+            .faq-question {
+                padding: 1rem;
+            }
+
+            .faq-item.active .faq-answer {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-tv"></i>
+                <span>AVN Electronics</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="#">Categories</a>
+                <a href="deals.html">Deals</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-user"></i>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">
+                <i class="fas fa-tv"></i>
+                <span>AVN Electronics</span>
+            </a>
+            <button class="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="deals.html">Deals</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="mobile-nav-actions">
+            <a href="#" class="btn">Login</a>
+            <a href="#" class="btn btn-outline">Register</a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Main Content -->
+    <main class="faq-container">
+        <!-- Hero Section -->
+        <section class="faq-hero">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about our products, services, and policies. Can't find what you're looking for? Contact our support team.</p>
+        </section>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <h2 class="section-title">Find Your Answer</h2>
+            <form class="search-form">
+                <input type="text" class="search-input" placeholder="Search our FAQs...">
+                <button type="submit" class="search-btn">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </form>
+        </section>
+
+        <!-- FAQ Content -->
+        <div class="faq-content">
+            <div class="note-box">
+                <p><strong>Note:</strong> These FAQs cover general questions. For product-specific questions, please refer to the <a href="manuals.html">product manuals</a> or contact our support team.</p>
+            </div>
+
+            <div class="faq-category">
+                <h3>Ordering & Shipping</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How long does shipping take?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Shipping times vary depending on your location and the shipping method selected at checkout:</p>
+                        <ul>
+                            <li><strong>Standard Shipping:</strong> 3-5 business days</li>
+                            <li><strong>Express Shipping:</strong> 1-2 business days</li>
+                            <li><strong>International Shipping:</strong> 7-14 business days</li>
+                        </ul>
+                        <p>You'll receive a tracking number via email once your order ships. During peak seasons or holidays, delivery times may be slightly longer.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I change or cancel my order after placing it?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We process orders quickly to ensure fast delivery, so changes or cancellations must be requested within 1 hour of placing your order. Please contact our customer service immediately at <a href="mailto:support@avnelectronics.com">support@avnelectronics.com</a> or call us at 1-800-AVN-HELP with your order number ready.</p>
+                        <p>If your order has already shipped, you may need to refuse delivery or return it following our return policy.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you offer international shipping?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we ship to most countries worldwide. International shipping rates and delivery times vary by destination. During checkout, you'll see the available shipping options and costs for your location.</p>
+                        <p>Please note that international orders may be subject to customs fees, import duties, and taxes, which are the responsibility of the recipient. These charges vary by country and are not included in the product price or shipping cost.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How can I track my order?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Once your order has shipped, you'll receive an email with your tracking number and a link to track your package. You can also track your order by logging into your account on our website and viewing your order history.</p>
+                        <p>If you're having trouble tracking your package or haven't received your tracking information within 2 business days of placing your order, please contact our customer service team for assistance.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-category">
+                <h3>Returns & Warranty</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What is your return policy?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer a 30-day return policy for most products. To be eligible for a return:</p>
+                        <ul>
+                            <li>The item must be unused and in the same condition as received</li>
+                            <li>It must be in the original packaging with all accessories</li>
+                            <li>A proof of purchase or receipt is required</li>
+                        </ul>
+                        <p>Some products have different policies or requirements (e.g., special order items, software). Please check the product page for specific return information.</p>
+                        <p>To initiate a return, please visit our <a href="returns.html">Returns Center</a> or contact our customer service team.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What is covered under warranty?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>AVN Electronics products come with a limited warranty that covers defects in materials and workmanship under normal use. The warranty period varies by product but is typically:</p>
+                        <ul>
+                            <li>1 year for most electronics</li>
+                            <li>2 years for premium products</li>
+                            <li>90 days for accessories</li>
+                        </ul>
+                        <p>The warranty does not cover damage caused by accidents, misuse, unauthorized modifications, or normal wear and tear. For complete warranty terms, please refer to the warranty documentation included with your product or visit our <a href="#">Warranty Information</a> page.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I make a warranty claim?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To make a warranty claim:</p>
+                        <ol>
+                            <li>Gather your proof of purchase (receipt or order confirmation) and the product's serial number</li>
+                            <li>Visit our <a href="#">Warranty Service</a> page and complete the warranty claim form</li>
+                            <li>Our support team will review your claim and provide instructions for repair or replacement</li>
+                        </ol>
+                        <p>For faster service, you may also contact our customer support team directly at 1-800-AVN-HELP. Please have your product model number and purchase information ready when you call.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-category">
+                <h3>Product Support</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Where can I find the manual for my product?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Product manuals are available on our <a href="manuals.html">Product Manuals</a> page. You can search by product name or model number to find the specific manual for your device.</p>
+                        <p>If you can't find your manual online, please contact our support team with your product model number and we'll be happy to assist you.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I update my device's firmware?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Firmware updates are available on our <a href="#">Firmware Updates</a> page. To update your device:</p>
+                        <ol>
+                            <li>Check your current firmware version in your device's settings menu</li>
+                            <li>Download the appropriate firmware file for your model</li>
+                            <li>Follow the instructions in the firmware update guide</li>
+                        </ol>
+                        <p>Some devices support over-the-air (OTA) updates that can be installed directly through the device's menu system. We recommend keeping your firmware updated for optimal performance and security.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>My device isn't working properly. What should I do?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>For troubleshooting assistance:</p>
+                        <ol>
+                            <li>Check the <a href="manuals.html">product manual</a> for troubleshooting tips specific to your device</li>
+                            <li>Ensure your device has the latest firmware update</li>
+                            <li>Try resetting the device to factory settings (back up any important data first)</li>
+                            <li>If the issue persists, contact our <a href="contact.html">Technical Support</a> team</li>
+                        </ol>
+                        <p>When contacting support, please have your product model number, serial number, and a detailed description of the issue ready. This will help us assist you more efficiently.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-category">
+                <h3>Account & Payments</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I create an account?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Creating an account is easy and provides benefits like order tracking, faster checkout, and exclusive offers:</p>
+                        <ol>
+                            <li>Click "Account" or "Sign In" at the top of any page</li>
+                            <li>Select "Create Account"</li>
+                            <li>Enter your email address and create a password</li>
+                            <li>Complete your profile information (optional)</li>
+                        </ol>
+                        <p>You can also create an account during checkout by selecting the option to save your information for future purchases.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What payment methods do you accept?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept the following payment methods:</p>
+                        <ul>
+                            <li>All major credit cards (Visa, Mastercard, American Express, Discover)</li>
+                            <li>PayPal</li>
+                            <li>Apple Pay</li>
+                            <li>Google Pay</li>
+                            <li>AVN Electronics Gift Cards</li>
+                        </ul>
+                        <p>For business or education purchases, we also accept purchase orders (subject to approval). Please contact our sales team for more information.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is my payment information secure?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we take security seriously. All payment transactions are encrypted using SSL technology and processed through PCI-compliant payment processors. We do not store full credit card numbers on our servers.</p>
+                        <p>For added security, we recommend using payment methods with built-in fraud protection like credit cards or PayPal. You can also enable two-factor authentication on your AVN Electronics account for additional security.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I pay with multiple payment methods?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Currently, our system only accepts one payment method per order. However, you can:</p>
+                        <ul>
+                            <li>Use a gift card balance first, then pay the remainder with another method</li>
+                            <li>Split payment by placing multiple orders (though this may affect shipping costs)</li>
+                            <li>Combine payment methods by using PayPal Balance with a linked bank account or credit card</li>
+                        </ul>
+                        <p>For large purchases, you may want to consider applying for our financing options, which allow you to pay over time.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <p><strong>Important:</strong> Always verify you're on our official website (www.avnelectronics.com) before entering any personal or payment information. AVN Electronics will never ask for your password or payment details via email or phone unless you initiated the contact.</p>
+            </div>
+
+            <div class="contact-prompt">
+                <h3>Still Need Help?</h3>
+                <p>Our customer support team is available to assist you with any questions not covered in our FAQs. We're committed to providing excellent service and ensuring you have the best experience with AVN Electronics products.</p>
+                <a href="contact.html" class="contact-btn">Contact Support</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>AVN Electronics</h3>
+                <p>Innovating the future of home entertainment and smart technology since 2010.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="smarttvs.html">Smart TVs</a></li>
+                    <li><a href="audio.html">Audio Systems</a></li>
+                    <li><a href="smarthome.html">Smart Home</a></li>
+                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="deals.html">Deals</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="shippingpolicy.html">Shipping Policy</a></li>
+                    <li><a href="warranty.html">Returns & Warranty</a></li>
+                    <li><a href="manual.html">Product Manuals</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="press.html">Press</a></li>
+                    <li><a href="investors.html">Investors</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 AVN Electronics. All rights reserved. | <a href="privacypolicy.html">Privacy Policy</a> | <a href="termsofservice.html">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const closeMenuBtn = document.querySelector('.close-menu');
+        const overlay = document.querySelector('.overlay');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // FAQ Accordion Functionality
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+
+        // Simple search functionality
+        const searchForm = document.querySelector('.search-form');
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchTerm = this.querySelector('.search-input').value.toLowerCase();
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            let foundMatch = false;
+            
+            faqQuestions.forEach(question => {
+                const questionText = question.textContent.toLowerCase();
+                const faqItem = question.closest('.faq-item');
+                
+                if (questionText.includes(searchTerm)) {
+                    faqItem.style.display = 'block';
+                    // Open the matching question and scroll to it
+                    if (!foundMatch) {
+                        faqItem.classList.add('active');
+                        faqItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        foundMatch = true;
+                    }
+                } else {
+                    faqItem.style.display = 'none';
+                }
+            });
+            
+            // If no matches found, show message
+            if (!foundMatch) {
+                alert('No FAQs matched your search. Please try different keywords or contact our support team.');
+                // Show all questions again
+                faqQuestions.forEach(question => {
+                    question.closest('.faq-item').style.display = 'block';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

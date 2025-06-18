@@ -1,0 +1,1936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deals - AVN Electronics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --red: #ef4444;
+            --green: #10b981;
+            --orange: #f59e0b;
+            --purple: #8b5cf6;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-actions i {
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-actions i:hover {
+            color: var(--primary);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--red);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Main Content */
+        .deals-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        /* Deals Header */
+        .deals-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .deals-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .deals-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Deal Categories */
+        .deal-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .deal-category {
+            background-color: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .deal-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .deal-category-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .deal-category-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .deal-category:hover .deal-category-img img {
+            transform: scale(1.05);
+        }
+
+        .deal-category-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--red);
+            color: white;
+            padding: 0.3rem 0.7rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .deal-category-info {
+            padding: 1.5rem;
+        }
+
+        .deal-category-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .deal-category-info p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .view-deals-btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 0.3rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .view-deals-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Featured Deals */
+        .featured-deals {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title i {
+            color: var(--orange);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: var(--red);
+            color: white;
+            padding: 0.3rem 0.7rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .product-actions {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            transform: translateX(50px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-actions {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .product-action-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .product-action-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .favorite.active {
+            color: var(--red);
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .current-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .old-price {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-decoration: line-through;
+        }
+
+        .discount-badge {
+            background-color: var(--green);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: #f59e0b;
+        }
+
+        .rating-count {
+            color: var(--gray);
+            font-size: 0.8rem;
+            margin-left: 0.3rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.7rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.3rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Flash Sale */
+        .flash-sale {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .flash-sale-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .flash-sale-timer {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--red);
+            font-weight: 600;
+        }
+
+        .flash-sale-timer i {
+            font-size: 1.2rem;
+        }
+
+        .view-all {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .view-all:hover {
+            text-decoration: underline;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, var(--orange), #f97316);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .newsletter h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 0.3rem 0 0 0.3rem;
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            padding: 0 1.5rem;
+            background-color: var(--dark);
+            color: white;
+            border: none;
+            border-radius: 0 0.3rem 0.3rem 0;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background-color: #0f172a;
+        }
+
+        /* Countdown Banner */
+        .countdown-banner {
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .countdown-banner h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .countdown-banner p {
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+        }
+
+        .countdown-timer {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .countdown-value {
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .shop-now-btn {
+            background-color: white;
+            color: var(--primary);
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .shop-now-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            transition: var(--transition);
+            padding: 2rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 0.3rem;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .cart-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .cart-item-price {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quantity-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .quantity {
+            width: 30px;
+            text-align: center;
+        }
+
+        .remove-item {
+            margin-left: auto;
+            color: var(--red);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .remove-item:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-total {
+            padding: 1.5rem 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-total-row:last-child {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.3rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .checkout-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .empty-cart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+        }
+
+        .empty-cart i {
+            font-size: 3rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow);
+            transform: translateX(150%);
+            transition: var(--transition);
+            z-index: 1002;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .notification.active {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background-color: var(--green);
+        }
+
+        .notification.error {
+            background-color: var(--red);
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 350px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            transition: var(--transition);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: block;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--primary);
+            padding-left: 10px;
+        }
+
+        .mobile-nav-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: white;
+            padding: 4rem 2rem 2rem;
+            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .footer-column p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            text-decoration: none;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .deals-container {
+                padding-top: 6rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .countdown-timer {
+                gap: 1rem;
+            }
+
+            .countdown-value {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .newsletter-form input,
+            .newsletter-form button {
+                width: 100%;
+                border-radius: 0.3rem;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .flash-sale-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .flash-sale-timer {
+                margin-top: 0.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .logo i {
+                font-size: 1.7rem;
+            }
+
+            .deals-container {
+                padding: 5rem 1rem 3rem;
+            }
+
+            .deals-header h1 {
+                font-size: 2rem;
+            }
+
+            .countdown-banner h2 {
+                font-size: 1.5rem;
+            }
+
+            .countdown-timer {
+                gap: 0.5rem;
+            }
+
+            .countdown-value {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .countdown-label {
+                font-size: 0.7rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-tv"></i>
+                <span>AVN Electronics</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="#">Categories</a>
+                <a href="deals.html" class="active">Deals</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-user"></i>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">
+                <i class="fas fa-tv"></i>
+                <span>AVN Electronics</span>
+            </a>
+            <button class="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="deals.html" class="active">Deals</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+        <div class="mobile-nav-actions">
+            <a href="#" class="btn">Login</a>
+            <a href="#" class="btn btn-outline">Register</a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be added here dynamically -->
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>Your cart is empty</h3>
+                <p>Start shopping to add items to your cart</p>
+            </div>
+        </div>
+        <div class="cart-total" style="display: none;">
+            <div class="cart-total-row">
+                <span>Subtotal:</span>
+                <span class="subtotal">$0.00</span>
+            </div>
+            <div class="cart-total-row">
+                <span>Shipping:</span>
+                <span>Free</span>
+            </div>
+            <div class="cart-total-row">
+                <span>Total:</span>
+                <span class="total">$0.00</span>
+            </div>
+        </div>
+        <button class="checkout-btn" style="display: none;">
+            <i class="fas fa-credit-card"></i>
+            Proceed to Checkout
+        </button>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span class="notification-message">Product added to cart</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="deals-container">
+        <!-- Deals Header -->
+        <div class="deals-header">
+            <h1>Exclusive Deals & Offers</h1>
+            <p>Discover incredible savings on top-rated electronics. Limited time offers on TVs, audio systems, smart home devices and more.</p>
+        </div>
+
+        <!-- Countdown Banner -->
+        <div class="countdown-banner">
+            <h2>Black Friday Countdown!</h2>
+            <p>Our biggest sale of the year is coming soon. Save up to 70% on select items. Sign up to get early access.</p>
+            <div class="countdown-timer">
+                <div class="countdown-item">
+                    <div class="countdown-value" id="days">14</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="hours">08</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="minutes">23</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="seconds">47</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+            <button class="shop-now-btn">
+                <i class="fas fa-bell"></i>
+                Notify Me
+            </button>
+        </div>
+
+        <!-- Deal Categories -->
+        <h2 class="section-title">
+            <i class="fas fa-tags"></i>
+            Hot Deal Categories
+        </h2>
+        <div class="deal-categories">
+            <!-- Category 1 -->
+            <div class="deal-category">
+                <div class="deal-category-img">
+                    <img src="https://images.unsplash.com/photo-1577975889927-5f94b5336c2e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1589&q=80" alt="Smart TVs">
+                </div>
+                <div class="deal-category-info">
+                    <h3>Smart TVs</h3>
+                    <p>Up to 50% off on 4K & 8K Smart TVs from top brands</p>
+                    <a href="#" class="view-deals-btn">View Deals</a>
+                </div>
+                <span class="deal-category-badge">50% OFF</span>
+            </div>
+
+            <!-- Category 2 -->
+            <div class="deal-category">
+                <div class="deal-category-img">
+                    <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1589&q=80" alt="Audio Systems">
+                </div>
+                <div class="deal-category-info">
+                    <h3>Audio Systems</h3>
+                    <p>Premium sound at discounted prices - limited stock</p>
+                    <a href="#" class="view-deals-btn">View Deals</a>
+                </div>
+                <span class="deal-category-badge">35% OFF</span>
+            </div>
+
+            <!-- Category 3 -->
+            <div class="deal-category">
+                <div class="deal-category-img">
+                    <img src="https://images.unsplash.com/photo-1558002038-1055907df827?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1589&q=80" alt="Smart Home">
+                </div>
+                <div class="deal-category-info">
+                    <h3>Smart Home</h3>
+                    <p>Automate your home with these exclusive deals</p>
+                    <a href="#" class="view-deals-btn">View Deals</a>
+                </div>
+                <span class="deal-category-badge">40% OFF</span>
+            </div>
+        </div>
+
+        <!-- Flash Sale -->
+        <div class="flash-sale">
+            <div class="flash-sale-header">
+                <h2 class="section-title">
+                    <i class="fas fa-bolt"></i>
+                    Flash Sale
+                </h2>
+                <div class="flash-sale-timer">
+                    <i class="fas fa-clock"></i>
+                    <span>Ends in: 05:23:47</span>
+                </div>
+                <a href="#" class="view-all">View All</a>
+            </div>
+
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card" data-category="audio" data-brand="avn" data-price="89.99">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1589&q=80" loading="lazy" alt="Wireless Earbuds">
+                        <span class="product-badge">FLASH SALE</span>
+                        <div class="product-actions">
+                            <div class="product-action-btn favorite">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="product-action-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-category">Audio</p>
+                        <h3 class="product-title">AVN AirBuds Pro</h3>
+                        <div class="product-price">
+                            <span class="current-price">$89.99</span>
+                            <span class="old-price">$159.99</span>
+                            <span class="discount-badge">44% OFF</span>
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="rating-count">(216)</span>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card" data-category="accessories" data-brand="avn" data-price="29.99">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1589&q=80" loading="lazy" alt="HDMI Cable">
+                        <span class="product-badge">FLASH SALE</span>
+                        <div class="product-actions">
+                            <div class="product-action-btn favorite">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="product-action-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-category">Accessories</p>
+                        <h3 class="product-title">AVN Ultra HD HDMI Cable</h3>
+                        <div class="product-price">
+                            <span class="current-price">$29.99</span>
+                            <span class="old-price">$49.99</span>
+                            <span class="discount-badge">40% OFF</span>
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span class="rating-count">(64)</span>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card" data-category="tvs" data-brand="sonic" data-price="1199.99">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1577975889927-5f94b5336c2e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1589&q=80" loading="lazy" alt="Sonic 8K TV">
+                        <span class="product-badge">FLASH SALE</span>
+                        <div class="product-actions">
+                            <div class="product-action-btn favorite">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="product-action-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-category">Smart TVs</p>
+                        <h3 class="product-title">Sonic 8K OLED Smart TV</h3>
+                        <div class="product-price">
+                            <span class="current-price">$1,199.99</span>
+                            <span class="old-price">$1,499.99</span>
+                            <span class="discount-badge">20% OFF</span>
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span class="rating-count">(78)</span>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card" data-category="audio" data-brand="nexus" data-price="129.99">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1589&q=80" loading="lazy" alt="Soundbar">
+                        <span class="product-badge">FLASH SALE</span>
+                        <div class="product-actions">
+                            <div class="product-action-btn favorite">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="product-action-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-category">Audio Systems</p>
+                        <h3 class="product-title">Nexus Soundbar Pro</h3>
+                        <div class="product-price">
+                            <span class="current-price">$129.99</span>
+                            <span class="old-price">$229.99</span>
+                            <span class="discount-badge">43% OFF</span>
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="rating-count">(203)</span>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Deals -->
+        <div class="featured-deals">
+            <h2 class="section-title">
+                <i class="fas fa-star"></i>
+                Featured Deals
+            </h2>
+
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card" data-category="tvs" data-brand="avn" data-price="799.99">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1589&q=80" loading="lazy" alt="AVN-X1 Smart TV">
+                        <span class="product-badge">BEST DEAL</span>
+                        <div class="product-actions">
+                            <div class="product-action-btn favorite">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="product-action-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-category">Smart TVs</p>
+                        <h3 class="product-title">AVN-X1 Ultra HD Smart TV</h3>
+                        <div class="product-price">
+                            <span class="current-price">$799.99</span>
+                            <span class="old-price">$1,199.99</span>
+                            <span class="discount-badge">33% OFF</span>
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="rating-count">(142)</span>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card" data-category="audio" data-brand="avn" data-price="299.99">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1545454675-3531b543be5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1589&q=80" loading="lazy" alt="SoundBeam Pro">
+                        <span class="product-badge">LIMITED STOCK</span>
+                        <div class="product-actions">
+                            <div class="product-action-btn favorite">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="product-action-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-category">Audio Systems</p>
+                        <h3 class="product-title">AVN SoundBeam Pro</h3>
+                        <div class="product-price">
+                            <span class="current-price">$299.99</span>
+                            <span class="old-price">$349.99</span>
+                            <span class="discount-badge">14% OFF</span>
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="rating-count">(89)</span>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card" data-category="smart-home" data-brand="avn" data-price="169.99">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1589&q=80" loading="lazy" alt="SmartHub">
+                        <span class="product-badge">NEW</span>
+                        <div class="product-actions">
+                            <div class="product-action-btn favorite">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="product-action-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-category">Smart Home</p>
+                        <h3 class="product-title">AVN SmartHub</h3>
+                        <div class="product-price">
+                            <span class="current-price">$169.99</span>
+                            <span class="old-price">$199.99</span>
+                            <span class="discount-badge">15% OFF</span>
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span class="rating-count">(47)</span>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card" data-category="smart-home" data-brand="quantum" data-price="199.99">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1558002038-1055907df827?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1589&q=80" loading="lazy" alt="Smart Thermostat">
+                        <span class="product-badge">DEAL</span>
+                        <div class="product-actions">
+                            <div class="product-action-btn favorite">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="product-action-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-category">Smart Home</p>
+                        <h3 class="product-title">Quantum Smart Thermostat</h3>
+                        <div class="product-price">
+                            <span class="current-price">$199.99</span>
+                            <span class="old-price">$249.99</span>
+                            <span class="discount-badge">20% OFF</span>
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="rating-count">(112)</span>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="newsletter">
+            <h2>Get Exclusive Deals in Your Inbox</h2>
+            <p>Subscribe to our newsletter and be the first to know about special offers, new products, and insider deals.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>AVN Electronics</h3>
+                <p>Innovating the future of home entertainment and smart technology since 2010.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="#">Smart TVs</a></li>
+                    <li><a href="#">Audio Systems</a></li>
+                    <li><a href="#">Smart Home</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Deals</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns & Warranty</a></li>
+                    <li><a href="#">Product Manuals</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Investors</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 AVN Electronics. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <audio id="bellSound" src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3" preload="auto"></audio>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const closeMenuBtn = document.querySelector('.close-menu');
+        const overlay = document.querySelector('.overlay');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Cart Functionality
+        const cartIcon = document.querySelector('.cart-icon');
+        const cartSidebar = document.querySelector('.cart-sidebar');
+        const closeCartBtn = document.querySelector('.close-cart');
+        const cartCount = document.querySelector('.cart-count');
+        const cartItemsContainer = document.querySelector('.cart-items');
+        const emptyCartMessage = document.querySelector('.empty-cart');
+        const cartTotalSection = document.querySelector('.cart-total');
+        const checkoutBtn = document.querySelector('.checkout-btn');
+        const notification = document.querySelector('.notification');
+
+        let cart = [];
+        let favorites = [];
+
+        // Toggle cart sidebar
+        cartIcon.addEventListener('click', () => {
+            cartSidebar.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeCartBtn.addEventListener('click', () => {
+            cartSidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notificationMessage = document.querySelector('.notification-message');
+            notificationMessage.textContent = message;
+            notification.className = 'notification';
+            notification.classList.add('active', type);
+            
+            setTimeout(() => {
+                notification.classList.remove('active');
+            }, 3000);
+        }
+
+        // Add to cart functionality
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const productCard = e.target.closest('.product-card');
+                const productId = productCard.dataset.id || Math.floor(Math.random() * 1000);
+                const productTitle = productCard.querySelector('.product-title').textContent;
+                const productPrice = parseFloat(productCard.querySelector('.current-price').textContent.replace('$', ''));
+                const productImage = productCard.querySelector('.product-image img').src;
+                const productCategory = productCard.querySelector('.product-category').textContent;
+
+                // Check if product already in cart
+                const existingItem = cart.find(item => item.id === productId);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: productId,
+                        title: productTitle,
+                        price: productPrice,
+                        image: productImage,
+                        category: productCategory,
+                        quantity: 1
+                    });
+                }
+
+                updateCart();
+                showNotification(`${productTitle} added to cart`);
+            });
+        });
+
+        // Update cart UI
+        function updateCart() {
+            // Update cart count
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+
+            // Update cart items
+            cartItemsContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                emptyCartMessage.style.display = 'flex';
+                cartTotalSection.style.display = 'none';
+                checkoutBtn.style.display = 'none';
+            } else {
+                emptyCartMessage.style.display = 'none';
+                cartTotalSection.style.display = 'block';
+                checkoutBtn.style.display = 'flex';
+
+                let subtotal = 0;
+
+                cart.forEach(item => {
+                    subtotal += item.price * item.quantity;
+
+                    const cartItemElement = document.createElement('div');
+                    cartItemElement.className = 'cart-item';
+                    cartItemElement.innerHTML = `
+                        <div class="cart-item-img">
+                            <img src="${item.image}" alt="${item.title}">
+                        </div>
+                        <div class="cart-item-details">
+                            <h3 class="cart-item-title">${item.title}</h3>
+                            <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+                            <div class="cart-item-actions">
+                                <button class="quantity-btn minus">-</button>
+                                <span class="quantity">${item.quantity}</span>
+                                <button class="quantity-btn plus">+</button>
+                                <button class="remove-item">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+
+                    cartItemsContainer.appendChild(cartItemElement);
+
+                    // Add event listeners to quantity buttons
+                    const minusBtn = cartItemElement.querySelector('.minus');
+                    const plusBtn = cartItemElement.querySelector('.plus');
+                    const removeBtn = cartItemElement.querySelector('.remove-item');
+                    const quantityDisplay = cartItemElement.querySelector('.quantity');
+
+                    minusBtn.addEventListener('click', () => {
+                        if (item.quantity > 1) {
+                            item.quantity -= 1;
+                            quantityDisplay.textContent = item.quantity;
+                            updateCart();
+                        }
+                    });
+
+                    plusBtn.addEventListener('click', () => {
+                        item.quantity += 1;
+                        quantityDisplay.textContent = item.quantity;
+                        updateCart();
+                    });
+
+                    removeBtn.addEventListener('click', () => {
+                        cart = cart.filter(cartItem => cartItem.id !== item.id);
+                        updateCart();
+                        showNotification(`${item.title} removed from cart`, 'error');
+                    });
+                });
+
+                // Update totals
+                const shipping = 0; // Free shipping
+                const total = subtotal + shipping;
+
+                document.querySelector('.subtotal').textContent = `$${subtotal.toFixed(2)}`;
+                document.querySelector('.total').textContent = `$${total.toFixed(2)}`;
+            }
+        }
+
+        // Favorite functionality
+        const favoriteButtons = document.querySelectorAll('.favorite');
+        favoriteButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const productCard = e.target.closest('.product-card');
+                const productId = productCard.dataset.id || Math.floor(Math.random() * 1000);
+                const productTitle = productCard.querySelector('.product-title').textContent;
+
+                if (button.classList.contains('active')) {
+                    button.classList.remove('active');
+                    favorites = favorites.filter(id => id !== productId);
+                    showNotification(`${productTitle} removed from favorites`, 'error');
+                } else {
+                    button.classList.add('active');
+                    favorites.push(productId);
+                    showNotification(`${productTitle} added to favorites`);
+                }
+            });
+        });
+
+        // Countdown timer
+        function updateCountdown() {
+            // Set the date we're counting down to (Black Friday - November 29, 2023)
+            const countDownDate = new Date("Nov 29, 2023 00:00:00").getTime();
+            
+            // Get today's date and time
+            const now = new Date().getTime();
+            
+            // Find the distance between now and the count down date
+            const distance = countDownDate - now;
+            
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Display the result
+            document.getElementById("days").textContent = days.toString().padStart(2, '0');
+            document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+            
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.getElementById("days").textContent = "00";
+                document.getElementById("hours").textContent = "00";
+                document.getElementById("minutes").textContent = "00";
+                document.getElementById("seconds").textContent = "00";
+            }
+        }
+
+        // Update the count down every 1 second
+        updateCountdown();
+        const countdownTimer = setInterval(updateCountdown, 1000);
+
+        // Flash sale timer
+        function updateFlashSaleTimer() {
+            let time = 5 * 60 * 60 + 23 * 60 + 47; // 5 hours, 23 minutes, 47 seconds
+            
+            function tick() {
+                time--;
+                
+                const hours = Math.floor(time / 3600);
+                const minutes = Math.floor((time % 3600) / 60);
+                const seconds = time % 60;
+                
+                document.querySelector('.flash-sale-timer span').textContent = 
+                    `Ends in: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (time <= 0) {
+                    clearInterval(timer);
+                    document.querySelector('.flash-sale-timer span').textContent = "Sale Ended";
+                }
+            }
+            
+            tick();
+            const timer = setInterval(tick, 1000);
+        }
+
+        updateFlashSaleTimer();
+
+        // Bell sound functionality
+const notifyBtn = document.querySelector('.shop-now-btn');
+const bellSound = document.getElementById('bellSound');
+
+notifyBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    
+    // Play the bell sound
+    bellSound.currentTime = 0; // Rewind to start in case it's already playing
+    bellSound.play();
+    
+    // Change button text temporarily
+    const originalText = notifyBtn.innerHTML;
+    notifyBtn.innerHTML = '<i class="fas fa-check"></i> Notification Set';
+    
+    // Show confirmation notification
+    showNotification("We'll notify you when the sale starts!", "success");
+    
+    // Reset button text after 2 seconds
+    setTimeout(() => {
+        notifyBtn.innerHTML = originalText;
+    }, 2000);
+});
+    </script>
+</body>
+</html>

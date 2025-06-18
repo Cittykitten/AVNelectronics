@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - AVN Electronics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stripe.js for payment processing -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --red: #ef4444;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-actions i {
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-actions i:hover {
+            color: var(--primary);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--red);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Main Content */
+        .contact-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        /* Hero Section */
+        .contact-hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .contact-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .contact-hero p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-bottom: 5rem;
+        }
+
+        .contact-info {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .info-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .info-content p, .info-content a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .info-content a:hover {
+            color: var(--primary);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-form h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 0.3rem;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.3rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Payment Section */
+        .payment-section {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 5rem;
+        }
+
+        .payment-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #f8fafc;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .payment-method.active {
+            background-color: rgba(37, 99, 235, 0.1);
+            border: 1px solid var(--primary);
+        }
+
+        .payment-method i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .payment-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .card-element {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 0.3rem;
+            border: 1px solid #ddd;
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: #f8fafc;
+            border-radius: 0.3rem;
+        }
+
+        .payment-total h3 {
+            font-size: 1.2rem;
+        }
+
+        .payment-total .amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .pay-btn {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 0.3rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .pay-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .pay-btn i {
+            font-size: 1.3rem;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .order-summary h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .order-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-item-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 0.3rem;
+            overflow: hidden;
+        }
+
+        .order-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .order-item-details {
+            flex: 1;
+        }
+
+        .order-item-name {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .order-item-price {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .order-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quantity-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .order-totals {
+            border-top: 1px solid #eee;
+            padding-top: 1.5rem;
+        }
+
+        .order-total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+
+        .order-total-row:last-child {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Map Section */
+        .map-section {
+            margin-bottom: 5rem;
+        }
+
+        .map-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .map-container {
+            height: 400px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 350px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            transition: var(--transition);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: block;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--primary);
+            padding-left: 10px;
+        }
+
+        .mobile-nav-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Footer */
+        footer {
+            background-color: white;
+            padding: 4rem 2rem 2rem;
+            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .footer-column p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            text-decoration: none;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .contact-container {
+                padding-top: 6rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .contact-hero h1 {
+                font-size: 2rem;
+            }
+
+            .payment-methods {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .logo i {
+                font-size: 1.7rem;
+            }
+
+            .contact-container {
+                padding: 5rem 1rem 3rem;
+            }
+
+            .contact-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .order-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-tv"></i>
+                <span>AVN Electronics</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="categories.html">Categories</a>
+                <a href="deals.html">Deals</a>
+                <a href="about.html">About</a>
+                <a href="contact.html" class="active">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-user"></i>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">2</span>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">
+                <i class="fas fa-tv"></i>
+                <span>AVN Electronics</span>
+            </a>
+            <button class="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="deals.html">Deals</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+
+        <div class="mobile-nav-actions">
+            <a href="#" class="btn">Login</a>
+            <a href="#" class="btn btn-outline">Register</a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Main Content -->
+    <main class="contact-container">
+        <!-- Contact Hero -->
+        <section class="contact-hero">
+            <h1>Get In Touch With Us</h1>
+            <p>Have questions about our products or need support with your purchase? Our team is here to help you with any inquiries you may have.</p>
+        </section>
+
+        <!-- Contact Grid -->
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h2>Contact Information</h2>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Our Headquarters</h3>
+                        <p>Ashaiman, Tema-West, Greater Accra, Ghana</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Phone</h3>
+                        <p><a href="tel:+233246229036">(+233) 246 229 036</a></p>
+                        <p><a href="tel:+233246229036">(+233) 207 006 290 (Support)</a></p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Email</h3>
+                        <p><a href="mailto:tegahtiana14@gmail.com">info@avnelectronics.com</a></p>
+                        <p><a href="mailto:tegahtiana14@gmail.com">support@avnelectronics.com</a></p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Business Hours</h3>
+                        <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                        <p>Saturday: 10:00 AM - 4:00 PM</p>
+                        <p>Sunday: Closed</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h2>Send Us a Message</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <h2>Your Order</h2>
+            <div class="order-items">
+                <div class="order-item">
+                    <div class="order-item-img">
+                        <img src="https://images.unsplash.com/photo-1547721064-da6cfb341d50?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="AVN X1 Smart TV">
+                    </div>
+                    <div class="order-item-details">
+                        <div class="order-item-name">AVN X1 65" 4K Smart TV</div>
+                        <div class="order-item-price">$899.99</div>
+                    </div>
+                    <div class="order-item-quantity">
+                        <span class="quantity-btn minus">-</span>
+                        <span>1</span>
+                        <span class="quantity-btn plus">+</span>
+                    </div>
+                </div>
+                <div class="order-item">
+                    <div class="order-item-img">
+                        <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80" alt="SoundBar Pro">
+                    </div>
+                    <div class="order-item-details">
+                        <div class="order-item-name">SoundBar Pro with Wireless Subwoofer</div>
+                        <div class="order-item-price">$249.99</div>
+                    </div>
+                    <div class="order-item-quantity">
+                        <span class="quantity-btn minus">-</span>
+                        <span>1</span>
+                        <span class="quantity-btn plus">+</span>
+                    </div>
+                </div>
+            </div>
+            <div class="order-totals">
+                <div class="order-total-row">
+                    <span>Subtotal:</span>
+                    <span>$1,149.98</span>
+                </div>
+                <div class="order-total-row">
+                    <span>Shipping:</span>
+                    <span>$49.99</span>
+                </div>
+                <div class="order-total-row">
+                    <span>Tax:</span>
+                    <span>$103.50</span>
+                </div>
+                <div class="order-total-row">
+                    <span>Total:</span>
+                    <span>$1,303.47</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Section -->
+        <div class="payment-section">
+            <h2>Complete Your Purchase</h2>
+            <div class="payment-methods">
+                <div class="payment-method active" data-method="card">
+                    <i class="far fa-credit-card"></i>
+                    <span>Credit/Debit Card</span>
+                </div>
+                <div class="payment-method" data-method="paypal">
+                    <i class="fab fa-paypal"></i>
+                    <span>PayPal</span>
+                </div>
+                <div class="payment-method" data-method="apple">
+                    <i class="fab fa-apple"></i>
+                    <span>Apple Pay</span>
+                </div>
+            </div>
+
+            <div class="payment-form">
+                <div id="card-element" class="card-element">
+                    <!-- Stripe Elements will be inserted here -->
+                </div>
+                <div id="card-errors" role="alert" style="color: var(--red); margin-bottom: 1rem;"></div>
+                
+                <div class="payment-total">
+                    <h3>Total Amount:</h3>
+                    <div class="amount">$1,303.47</div>
+                </div>
+
+                <button id="submit-payment" class="pay-btn">
+                    <i class="fas fa-lock"></i>
+                    Pay Now
+                </button>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="map-section">
+            <h2>Visit Our Store</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3172.3325395304418!2d-122.01116148469422!3d37.33464727984242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb596e9e188fd%3A0x3b0d8391510688f0!2sApple%20Park!5e0!3m2!1sen!2sus!4v1689870720937!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>AVN Electronics</h3>
+                <p>Innovating the future of home entertainment and smart technology since 2010.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="smarttvs.html">Smart TVs</a></li>
+                    <li><a href="audio.html">Audio Systems</a></li>
+                    <li><a href="smarthome.html">Smart Home</a></li>
+                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="deals.html">Deals</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="shippingpolicy.html">Shipping Policy</a></li>
+                    <li><a href="warranty.html">Returns & Warranty</a></li>
+                    <li><a href="manual.html">Product Manuals</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="press.html">Press</a></li>
+                    <li><a href="investors.html">Investors</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 AVN Electronics. All rights reserved. | <a href="privacypolicy.html">Privacy Policy</a> | <a href="termsofservice.html">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const closeMenuBtn = document.querySelector('.close-menu');
+        const overlay = document.querySelector('.overlay');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Payment Method Selection
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', () => {
+                paymentMethods.forEach(m => m.classList.remove('active'));
+                method.classList.add('active');
+            });
+        });
+
+        // Quantity Adjustment
+        const quantityBtns = document.querySelectorAll('.quantity-btn');
+        
+        quantityBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const quantityElement = btn.parentElement.querySelector('span:not(.quantity-btn)');
+                let quantity = parseInt(quantityElement.textContent);
+                
+                if (btn.classList.contains('plus')) {
+                    quantity++;
+                } else if (btn.classList.contains('minus') && quantity > 1) {
+                    quantity--;
+                }
+                
+                quantityElement.textContent = quantity;
+                updateOrderTotal();
+            });
+        });
+
+        // Update Order Total
+        function updateOrderTotal() {
+            // In a real implementation, you would calculate based on actual quantities and prices
+            console.log('Order total updated');
+        }
+
+        // Stripe Payment Integration
+        const stripe = Stripe('pk_test_51Nk3y2SImwf7DA0forJX2G+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK+2L+QYwK

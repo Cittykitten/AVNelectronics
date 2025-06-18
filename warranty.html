@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Returns & Warranty - AVN Electronics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --red: #ef4444;
+            --green: #10b981;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-actions i {
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-actions i:hover {
+            color: var(--primary);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--red);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Main Content */
+        .returns-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        /* Hero Section */
+        .returns-hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .returns-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .returns-hero p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Returns Content */
+        .returns-content {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .policy-section {
+            margin-bottom: 3rem;
+        }
+
+        .policy-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .policy-section p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .policy-section ul {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .policy-section li {
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .policy-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .policy-table th, .policy-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .policy-table th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .policy-table td {
+            color: var(--gray);
+        }
+
+        .policy-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .note-box {
+            background-color: #f0f9ff;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 0.3rem 0.3rem 0;
+        }
+
+        .warning-box {
+            background-color: #fef2f2;
+            border-left: 4px solid var(--red);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 0.3rem 0.3rem 0;
+        }
+
+        .success-box {
+            background-color: #ecfdf5;
+            border-left: 4px solid var(--green);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 0.3rem 0.3rem 0;
+        }
+
+        .note-box p, .warning-box p, .success-box p {
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .process-steps {
+            counter-reset: step-counter;
+            margin-bottom: 2rem;
+        }
+
+        .process-step {
+            position: relative;
+            padding-left: 3.5rem;
+            margin-bottom: 1.5rem;
+            min-height: 2.5rem;
+        }
+
+        .process-step::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .process-step h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .process-step p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 350px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            transition: var(--transition);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: block;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--primary);
+            padding-left: 10px;
+        }
+
+        .mobile-nav-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Footer */
+        footer {
+            background-color: white;
+            padding: 4rem 2rem 2rem;
+            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .footer-column p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            text-decoration: none;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .returns-container {
+                padding-top: 6rem;
+            }
+
+            .returns-content {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .returns-hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .logo i {
+                font-size: 1.7rem;
+            }
+
+            .returns-container {
+                padding: 5rem 1rem 3rem;
+            }
+
+            .returns-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .returns-content {
+                padding: 1.5rem;
+            }
+
+            .process-step {
+                padding-left: 2.5rem;
+            }
+
+            .process-step::before {
+                width: 2rem;
+                height: 2rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-tv"></i>
+                <span>AVN Electronics</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="#">Categories</a>
+                <a href="deals.html">Deals</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-user"></i>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">
+                <i class="fas fa-tv"></i>
+                <span>AVN Electronics</span>
+            </a>
+            <button class="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="deals.html">Deals</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="mobile-nav-actions">
+            <a href="#" class="btn">Login</a>
+            <a href="#" class="btn btn-outline">Register</a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Main Content -->
+    <main class="returns-container">
+        <!-- Hero Section -->
+        <section class="returns-hero">
+            <h1>Returns & Warranty</h1>
+            <p>Our commitment to your satisfaction with clear return policies and comprehensive warranty coverage.</p>
+        </section>
+
+        <!-- Returns Content -->
+        <div class="returns-content">
+            <div class="policy-section">
+                <h2 class="section-title">Return Policy</h2>
+                <p>At AVN Electronics, we want you to be completely satisfied with your purchase. If you're not happy with your product, we offer a straightforward return process.</p>
+                
+                <div class="note-box">
+                    <p><strong>Note:</strong> All returns must be initiated within 30 days of receiving your order. Some products may have different return windows as noted on their product pages.</p>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h3>Eligibility for Returns</h3>
+                <p>To be eligible for a return, your item must be:</p>
+                <ul>
+                    <li>In its original condition (unused, unopened, with all tags and packaging intact)</li>
+                    <li>Accompanied by the original receipt or proof of purchase</li>
+                    <li>Returned within 30 days of delivery</li>
+                </ul>
+                
+                <div class="warning-box">
+                    <p><strong>Non-Returnable Items:</strong> Certain items cannot be returned including software, downloadable products, personalized/customized items, and products marked as final sale.</p>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h3>How to Return an Item</h3>
+                <p>Follow these simple steps to return your product:</p>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <h4>Initiate Your Return</h4>
+                        <p>Log in to your account and go to "Order History" to start the return process, or contact our customer service team.</p>
+                    </div>
+                    <div class="process-step">
+                        <h4>Package Your Item</h4>
+                        <p>Securely pack the item in its original packaging with all accessories and documentation included.</p>
+                    </div>
+                    <div class="process-step">
+                        <h4>Ship Your Return</h4>
+                        <p>Use the prepaid return shipping label we provide or ship the item back to us at your expense.</p>
+                    </div>
+                    <div class="process-step">
+                        <h4>Receive Your Refund</h4>
+                        <p>Once we receive and inspect your return, we'll process your refund within 5-7 business days.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h3>Refund Information</h3>
+                <p>Refunds will be issued to the original payment method. Please allow 5-7 business days for the refund to appear in your account after we process it.</p>
+                
+                <table class="policy-table">
+                    <thead>
+                        <tr>
+                            <th>Return Type</th>
+                            <th>Refund Amount</th>
+                            <th>Shipping Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Unopened/Unused Product</td>
+                            <td>Full refund</td>
+                            <td>Free return shipping</td>
+                        </tr>
+                        <tr>
+                            <td>Opened/Used Product</td>
+                            <td>Partial refund (up to 85%)</td>
+                            <td>Customer pays return shipping</td>
+                        </tr>
+                        <tr>
+                            <td>Defective/Damaged Product</td>
+                            <td>Full refund or replacement</td>
+                            <td>Free return shipping</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="policy-section">
+                <h3>Warranty Information</h3>
+                <p>All AVN Electronics products come with a manufacturer's warranty against defects in materials and workmanship.</p>
+                
+                <div class="success-box">
+                    <p><strong>Standard Warranty:</strong> Most products come with a 1-year limited warranty. Premium products may have extended warranty coverage as noted on their product pages.</p>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h3>What's Covered by Warranty</h3>
+                <p>Our warranty covers:</p>
+                <ul>
+                    <li>Manufacturing defects</li>
+                    <li>Faulty components</li>
+                    <li>Workmanship issues</li>
+                </ul>
+                
+                <div class="warning-box">
+                    <p><strong>Warranty Exclusions:</strong> The warranty does not cover damage caused by accidents, misuse, neglect, unauthorized modifications, or normal wear and tear.</p>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h3>Warranty Claim Process</h3>
+                <p>To make a warranty claim:</p>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <h4>Contact Support</h4>
+                        <p>Reach out to our customer service team with your order details and description of the issue.</p>
+                    </div>
+                    <div class="process-step">
+                        <h4>Provide Documentation</h4>
+                        <p>You may need to provide proof of purchase, photos/videos of the issue, and product serial numbers.</p>
+                    </div>
+                    <div class="process-step">
+                        <h4>Follow Instructions</h4>
+                        <p>Our team will guide you through the next steps which may include troubleshooting, repair, or replacement.</p>
+                    </div>
+                    <div class="process-step">
+                        <h4>Resolution</h4>
+                        <p>We'll resolve your warranty claim as quickly as possible, typically within 10-14 business days.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h3>Extended Warranty Options</h3>
+                <p>For additional protection, consider our extended warranty plans:</p>
+                
+                <table class="policy-table">
+                    <thead>
+                        <tr>
+                            <th>Plan</th>
+                            <th>Coverage Period</th>
+                            <th>Benefits</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Standard</td>
+                            <td>1 year</td>
+                            <td>Included with purchase, covers manufacturing defects</td>
+                        </tr>
+                        <tr>
+                            <td>Extended</td>
+                            <td>2-3 years</td>
+                            <td>Additional coverage period, includes accidental damage protection</td>
+                        </tr>
+                        <tr>
+                            <td>Premium</td>
+                            <td>3-5 years</td>
+                            <td>Full coverage including parts, labor, and in-home service for select products</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="policy-section">
+                <h3>Contact Us</h3>
+                <p>For any questions about our return policy or warranty coverage, please contact our customer service team:</p>
+                <ul>
+                    <li>Email: <a href="mailto:returns@avnelectronics.com">returns@avnelectronics.com</a></li>
+                    <li>Phone: 1-800-AVN-RETURN (1-800-286-7387)</li>
+                    <li>Live Chat: Available on our website during business hours</li>
+                </ul>
+                <p>Our customer service hours are Monday-Friday, 9am-6pm EST.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>AVN Electronics</h3>
+                <p>Innovating the future of home entertainment and smart technology since 2010.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="smarttvs.html">Smart TVs</a></li>
+                    <li><a href="audio.html">Audio Systems</a></li>
+                    <li><a href="smarthome.html">Smart Home</a></li>
+                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="deals.html">Deals</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="shippingpolicy.html">Shipping Policy</a></li>
+                    <li><a href="warranty.html">Returns & Warranty</a></li>
+                    <li><a href="manual.html">Product Manuals</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="press.html">Press</a></li>
+                    <li><a href="investors.html">Investors</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 AVN Electronics. All rights reserved. | <a href="privacypolicy.html">Privacy Policy</a> | <a href="termsofservice.html">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const closeMenuBtn = document.querySelector('.close-menu');
+        const overlay = document.querySelector('.overlay');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    </script>
+</body>
+</html>

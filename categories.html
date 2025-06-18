@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories - AVN Electronics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="categories.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-tv"></i>
+                <span>AVN Electronics</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="categories.html" class="active">Categories</a>
+                <a href="deals.html">Deals</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-user"></i>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">
+                <i class="fas fa-tv"></i>
+                <span>AVN Electronics</span>
+            </a>
+            <button class="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="categories.html" class="active">Categories</a></li>
+            <li><a href="#">Deals</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+        <div class="mobile-nav-actions">
+            <a href="#" class="btn">Login</a>
+            <a href="#" class="btn btn-outline">Register</a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be added here dynamically -->
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>Your cart is empty</h3>
+                <p>Start shopping to add items to your cart</p>
+            </div>
+        </div>
+        <div class="cart-total" style="display: none;">
+            <div class="cart-total-row">
+                <span>Subtotal:</span>
+                <span class="subtotal">$0.00</span>
+            </div>
+            <div class="cart-total-row">
+                <span>Shipping:</span>
+                <span>Free</span>
+            </div>
+            <div class="cart-total-row">
+                <span>Total:</span>
+                <span class="total">$0.00</span>
+            </div>
+        </div>
+        <button class="checkout-btn" style="display: none;">
+            <i class="fas fa-credit-card"></i>
+            Proceed to Checkout
+        </button>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span class="notification-message">Product added to cart</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="categories-container">
+        <div class="page-header">
+            <h1>Browse Our Categories</h1>
+            <p>Discover the perfect electronics for your needs across our carefully curated categories</p>
+        </div>
+
+        <div class="categories-grid">
+            <!-- Category 1 -->
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80" loading="lazy" alt="Smart TVs">
+                <div class="category-overlay">
+                    <h2>Smart TVs</h2>
+                    <p>Experience stunning visuals with our cutting-edge television technology</p>
+                    <div>
+                        <a href="shop.html?category=tvs" class="btn">Shop Now</a>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category 2 -->
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80" loading="lazy" alt="Audio Systems">
+                <div class="category-overlay">
+                    <h2>Audio Systems</h2>
+                    <p>Immerse yourself in crystal-clear sound with our premium audio equipment</p>
+                    <div>
+                        <a href="shop.html?category=audio" class="btn">Shop Now</a>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category 3 -->
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1558002038-1055907df827?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80" loading="lazy" alt="Smart Home">
+                <div class="category-overlay">
+                    <h2>Smart Home</h2>
+                    <p>Automate and control your living space with our smart home solutions</p>
+                    <div>
+                        <a href="shop.html?category=smart-home" class="btn">Shop Now</a>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category 4 -->
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80" loading="lazy" alt="Headphones">
+                <div class="category-overlay">
+                    <h2>Headphones</h2>
+                    <p>Premium sound quality for music lovers and audiophiles</p>
+                    <div>
+                        <a href="shop.html?category=headphones" class="btn">Shop Now</a>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category 5 -->
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80" loading="lazy" alt="Accessories">
+                <div class="category-overlay">
+                    <h2>Accessories</h2>
+                    <p>Essential add-ons to enhance your electronic devices</p>
+                    <div>
+                        <a href="shop.html?category=accessories" class="btn">Shop Now</a>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category 6 -->
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80" loading="lazy" alt="Gaming">
+                <div class="category-overlay">
+                    <h2>Gaming</h2>
+                    <p>High-performance gear for the ultimate gaming experience</p>
+                    <div>
+                        <a href="shop.html?category=gaming" class="btn">Shop Now</a>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Brands Section -->
+        <div class="featured-brands">
+            <div class="section-title">
+                <h2>Featured Brands</h2>
+                <p>We partner with the most trusted names in electronics</p>
+            </div>
+            <div class="brands-grid">
+                <div class="brand-card">
+                    <img src="https://via.placeholder.com/150x60?text=AVN" loading="lazy" alt="AVN">
+                </div>
+                <div class="brand-card">
+                    <img src="https://via.placeholder.com/150x60?text=Sonic" loading="lazy" alt="Sonic">
+                </div>
+                <div class="brand-card">
+                    <img src="https://via.placeholder.com/150x60?text=Quantum" loading="lazy" alt="Quantum">
+                </div>
+                <div class="brand-card">
+                    <img src="https://via.placeholder.com/150x60?text=Nexus" loading="lazy" alt="Nexus">
+                </div>
+                <div class="brand-card">
+                    <img src="https://via.placeholder.com/150x60?text=Pulse" loading="lazy" alt="Pulse">
+                </div>
+                <div class="brand-card">
+                    <img src="https://via.placeholder.com/150x60?text=Aurora" loading="lazy" alt="Aurora">
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Stay updated with our latest products, exclusive deals, and tech news.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>AVN Electronics</h3>
+                <p>Innovating the future of home entertainment and smart technology since 2010.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="smarttvs.html">Smart TVs</a></li>
+                    <li><a href="audio.html">Audio Systems</a></li>
+                    <li><a href="smarthome.html">Smart Home</a></li>
+                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="deals.html">Deals</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="shippingpolicy.html">Shipping Policy</a></li>
+                    <li><a href="warranty.html">Returns & Warranty</a></li>
+                    <li><a href="manual.html">Product Manuals</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="press.html">Press</a></li>
+                    <li><a href="investors.html">Investors</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 AVN Electronics. All rights reserved. | <a href="privacypolicy.html">Privacy Policy</a> | <a href="termsofservice.html">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const closeMenuBtn = document.querySelector('.close-menu');
+        const overlay = document.querySelector('.overlay');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Cart Functionality
+        const cartIcon = document.querySelector('.cart-icon');
+        const cartSidebar = document.querySelector('.cart-sidebar');
+        const closeCartBtn = document.querySelector('.close-cart');
+        const cartCount = document.querySelector('.cart-count');
+        const cartItemsContainer = document.querySelector('.cart-items');
+        const emptyCartMessage = document.querySelector('.empty-cart');
+        const cartTotalSection = document.querySelector('.cart-total');
+        const checkoutBtn = document.querySelector('.checkout-btn');
+        const notification = document.querySelector('.notification');
+
+        let cart = [];
+
+        // Toggle cart sidebar
+        cartIcon.addEventListener('click', () => {
+            cartSidebar.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeCartBtn.addEventListener('click', () => {
+            cartSidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notificationMessage = document.querySelector('.notification-message');
+            notificationMessage.textContent = message;
+            notification.className = 'notification';
+            notification.classList.add('active', type);
+            
+            setTimeout(() => {
+                notification.classList.remove('active');
+            }, 3000);
+        }
+
+        // Add to cart functionality (for any add-to-cart buttons on the page

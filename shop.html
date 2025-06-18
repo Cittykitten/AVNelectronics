@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - AVN Electronics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="shop.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-tv"></i>
+                <span>AVN Electronics</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="shop.html" class="active">Shop</a>
+                <a href="categories.html">Categories</a>
+                <a href="deals.html">Deals</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-user"></i>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">
+                <i class="fas fa-tv"></i>
+                <span>AVN Electronics</span>
+            </a>
+            <button class="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html" class="active">Shop</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="deals.html">Deals</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="mobile-nav-actions">
+            <a href="#" class="btn">Login</a>
+            <a href="#" class="btn btn-outline">Register</a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be added here dynamically -->
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>Your cart is empty</h3>
+                <p>Start shopping to add items to your cart</p>
+            </div>
+        </div>
+        <div class="cart-total" style="display: none;">
+            <div class="cart-total-row">
+                <span>Subtotal:</span>
+                <span class="subtotal">$0.00</span>
+            </div>
+            <div class="cart-total-row">
+                <span>Shipping:</span>
+                <span>Free</span>
+            </div>
+            <div class="cart-total-row">
+                <span>Total:</span>
+                <span class="total">$0.00</span>
+            </div>
+        </div>
+        <button class="checkout-btn" style="display: none;">
+            <i class="fas fa-credit-card"></i>
+            Proceed to Checkout
+        </button>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span class="notification-message">Product added to cart</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="shop-container">
+        <div class="products-header">
+            <h1>Shop Electronics</h1>
+            <div class="sort-options">
+                <span>Sort by:</span>
+                <select id="sort-products">
+                    <option value="featured">Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="name-asc">Name: A-Z</option>
+                    <option value="name-desc">Name: Z-A</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Sidebar Filters -->
+        <aside class="sidebar">
+            <div class="filter-group">
+                <h3>Categories</h3>
+                <ul class="filter-options">
+                    <li>
+                        <label>
+                            <input type="checkbox" name="category" value="tvs" checked>
+                            Smart TVs
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="category" value="audio" checked>
+                            Audio Systems
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="category" value="smart-home" checked>
+                            Smart Home
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="category" value="accessories" checked>
+                            Accessories
+                        </label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="filter-group">
+                <h3>Price Range</h3>
+                <input type="range" class="price-range" min="0" max="2000" value="2000" step="50">
+                <div class="price-values">
+                    <span>$0</span>
+                    <span>$2000</span>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Brand</h3>
+                <ul class="filter-options">
+                    <li>
+                        <label>
+                            <input type="checkbox" name="brand" value="avn" checked>
+                            AVN
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="brand" value="sonic" checked>
+                            Sonic
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="brand" value="quantum" checked>
+                            Quantum
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="brand" value="nexus" checked>
+                            Nexus
+                        </label>
+                    </li>
+                </ul>
+            </div>
+
+            <button class="filter-btn">Apply Filters</button>
+        </aside>
+
+        <!-- Products Grid -->
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card" data-category="tvs" data-brand="avn" data-price="899.99">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/10706485.png" loading="lazy" alt="AVN-X1 Smart TV">
+                    <span class="product-badge">Sale</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Smart TVs</p>
+                    <h3 class="product-title">AVN-X1 Ultra HD Smart TV</h3>
+                    <div class="product-price">
+                        <span class="current-price">$899.99</span>
+                        <span class="old-price">$1,199.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="rating-count">(142)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card" data-category="audio" data-brand="avn" data-price="349.99">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/2301.i518.021.S.m005.c13.isometric sound speakers.jpg" loading="lazy" alt="SoundBeam Pro">
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Audio Systems</p>
+                    <h3 class="product-title">AVN SoundBeam Pro</h3>
+                    <div class="product-price">
+                        <span class="current-price">$349.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="rating-count">(89)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card" data-category="smart-home" data-brand="avn" data-price="199.99">
+                <div class="product-image">
+                    <img src="images/Screenshot_2025-06-17_115327-removebg-preview.png" loading="lazy" alt="SmartHub">
+                    <span class="product-badge">New</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Smart Home</p>
+                    <h3 class="product-title">AVN SmartHub</h3>
+                    <div class="product-price">
+                        <span class="current-price">$199.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="rating-count">(47)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card" data-category="audio" data-brand="avn" data-price="129.99">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/Screenshot_2025-06-17_120404-removebg-preview.png" loading="lazy" alt="Wireless Earbuds">
+                    <span class="product-badge">Popular</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Audio</p>
+                    <h3 class="product-title">AVN AirBuds Pro</h3>
+                    <div class="product-price">
+                        <span class="current-price">$129.99</span>
+                        <span class="old-price">$159.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="rating-count">(216)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card" data-category="tvs" data-brand="sonic" data-price="1499.99">
+                <div class="product-image">
+                    <img src="images/10706487.png" loading="lazy" alt="Sonic 8K TV">
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Smart TVs</p>
+                    <h3 class="product-title">Sonic 8K OLED Smart TV</h3>
+                    <div class="product-price">
+                        <span class="current-price">$1,499.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="rating-count">(78)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card" data-category="smart-home" data-brand="quantum" data-price="249.99">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/Screenshot_2025-06-17_115327-removebg-preview.png" loading="lazy" alt="Smart Thermostat">
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Smart Home</p>
+                    <h3 class="product-title">Quantum Smart Thermostat</h3>
+                    <div class="product-price">
+                        <span class="current-price">$249.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="rating-count">(112)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card" data-category="audio" data-brand="nexus" data-price="179.99">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/Screenshot_2025-06-17_184006-removebg-preview.png" loading="lazy" alt="Soundbar">
+                    <span class="product-badge">Sale</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Audio Systems</p>
+                    <h3 class="product-title">Nexus Soundbar Pro</h3>
+                    <div class="product-price">
+                        <span class="current-price">$179.99</span>
+                        <span class="old-price">$229.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="rating-count">(203)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+                        <!-- Product 8 -->
+            <div class="product-card" data-category="gaming" data-brand="sony" data-price="499.99">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/Screenshot_2025-06-17_184348-removebg-preview.png" loading="lazy" alt="PlayStation 5">
+                    <span class="product-badge">Hot</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Gaming Consoles</p>
+                    <h3 class="product-title">Sony PlayStation 5</h3>
+                    <div class="product-price">
+                        <span class="current-price">$499.99</span>
+                        <span class="old-price">$549.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="rating-count">(1,452)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+                        <!-- Product 9 -->
+            <div class="product-card" data-category="gaming" data-brand="meta" data-price="499.99">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/top-view-virtual-reality-headset-removebg-preview.png" loading="lazy" alt="Meta Quest 3 VR Headset">
+                    <span class="product-badge">New</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Virtual Reality</p>
+                    <h3 class="product-title">Meta Quest 3 VR Headset</h3>
+                    <div class="product-price">
+                        <span class="current-price">$499.99</span>
+                        <span class="old-price">$549.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i> <!-- 4/5 stars -->
+                        <span class="rating-count">(892)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+                        <!-- Product 10 -->
+            <div class="product-card" data-category="audio" data-brand="sony" data-price="349.99">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/d016298b-eb65-4c54-8d7c-8adbe9490ffc-removebg-preview.png" loading="lazy" alt="Sony WH-1000XM5 Wireless Headphones">
+                    <span class="product-badge">Best Seller</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Wireless Headphones</p>
+                    <h3 class="product-title">Sony WH-1000XM5</h3>
+                    <div class="product-price">
+                        <span class="current-price">$349.99</span>
+                        <span class="old-price">$399.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="rating-count">(2,450)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+                        <!-- Product 11-->
+            <div class="product-card" data-category="audio" data-brand="hyperx" data-price="99.99">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/14415.jpg" loading="lazy" alt="HyperX Cloud II Gaming Headset">
+                    <span class="product-badge">Best Seller</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Gaming Headset</p>
+                    <h3 class="product-title">HyperX Cloud II</h3>
+                    <div class="product-price">
+                        <span class="current-price">$99.99</span>
+                        <span class="old-price">$129.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="rating-count">(4,320)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 12 -->
+            <div class="product-card" data-category="wearables" data-brand="xiaomi" data-price="49.99">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/11873.jpg" loading="lazy" alt="Xiaomi Smart Band 8">
+                    <span class="product-badge">New</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Fitness Tracker</p>
+                    <h3 class="product-title">Xiaomi Smart Band 8</h3>
+                    <div class="product-price">
+                        <span class="current-price">$49.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="rating-count">(1,890)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 13 -->
+            <div class="product-card" data-category="wearables" data-brand="meta" data-price="299.99">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/Screenshot_2025-06-17_192246-removebg-preview.png" loading="lazy" alt="Ray-Ban Meta Smart Glasses">
+                    <span class="product-badge">Limited</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Smart Glasses</p>
+                    <h3 class="product-title">Ray-Ban Meta</h3>
+                    <div class="product-price">
+                        <span class="current-price">$299.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="rating-count">(3,150)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+                        <!-- Product 14 -->
+            <div class="product-card" data-category="networking" data-brand="tp-link" data-price="249.99">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/Wireless router and green Wi-Fi symbol 3D illustration.jpg" loading="lazy" alt="TP-Link Archer AX6000 Wi-Fi 6 Router">
+                    <span class="product-badge">Best Seller</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Wi-Fi Routers</p>
+                    <h3 class="product-title">TP-Link Archer AX6000</h3>
+                    <div class="product-price">
+                        <span class="current-price">$249.99</span>
+                        <span class="old-price">$299.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="rating-count">(1,890)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 15 -->
+            <div class="product-card" data-category="photography" data-brand="canon" data-price="699.99">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/3d-photo-camera.jpg" loading="lazy" alt="Canon EOS R50 Mirrorless Camera">
+                    <span class="product-badge">New</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Mirrorless Cameras</p>
+                    <h3 class="product-title">Canon EOS R50</h3>
+                    <div class="product-price">
+                        <span class="current-price">$699.99</span>
+                        <span class="old-price">$799.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="rating-count">(1,250)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 16 -->
+            <div class="product-card" data-category="videography" data-brand="sony" data-price="998.00">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/Screenshot_2025-06-17_194302-removebg-preview.png" loading="lazy" alt="Sony FDR-AX43 4K Camcorder">
+                    <span class="product-badge">Sale</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Camcorders</p>
+                    <h3 class="product-title">Sony FDR-AX43 4K Handycam</h3>
+                    <div class="product-price">
+                        <span class="current-price">$998.00</span>
+                        <span class="old-price">$1,199.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="rating-count">(890)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 17 -->
+            <div class="product-card" data-category="accessories" data-brand="logitech" data-price="199.99">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/Screenshot_2025-06-17_194710-removebg-preview.png" loading="lazy" alt="Logitech Brio 4K Webcam">
+                    <span class="product-badge">Premium</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Webcams</p>
+                    <h3 class="product-title">Logitech Brio 4K</h3>
+                    <div class="product-price">
+                        <span class="current-price">$199.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="rating-count">(3,450)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 18-->
+            <div class="product-card" data-category="drones" data-brand="dji" data-price="759.00">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/Screenshot_2025-06-17_195049-removebg-preview.png" loading="lazy" alt="DJI Mini 4 Pro Drone">
+                    <span class="product-badge">Hot</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Drones</p>
+                    <h3 class="product-title">DJI Mini 4 Pro</h3>
+                    <div class="product-price">
+                        <span class="current-price">$759.00</span>
+                        <span class="old-price">$899.00</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="rating-count">(2,780)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+                        <!-- Product 19 -->
+            <div class="product-card" data-category="audio" data-brand="apple" data-price="249.00">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/Screenshot_2025-06-17_201659-removebg-preview.png" loading="lazy" alt="Apple AirPods Pro 2">
+                    <span class="product-badge">New</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Wireless Earbuds</p>
+                    <h3 class="product-title">Apple AirPods Pro 2</h3>
+                    <div class="product-price">
+                        <span class="current-price">$249.00</span>
+                        <span class="old-price">$279.00</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="rating-count">(4,890)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+                        <!-- Product 20-->
+            <div class="product-card" data-category="enterprise" data-brand="dell" data-price="3299.00">
+                <div class="product-image">
+                    <img style="object-fit: contain;" src="images/Screenshot_2025-06-17_200507-removebg-preview.png" loading="lazy" alt="Dell PowerEdge R750 Server">
+                    <span class="product-badge">Enterprise</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Rack Servers</p>
+                    <h3 class="product-title">Dell PowerEdge R750</h3>
+                    <div class="product-price">
+                        <span class="current-price">$3,299.00</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="rating-count">(128)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Configure & Buy
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 21 -->
+            <div class="product-card" data-category="accessories" data-brand="avn" data-price="49.99">
+                <div class="product-image">
+                    <img src="images/pexels-srattha-nualsate-2695613-12997230.jpg" loading="lazy" alt="HDMI Cable">
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Accessories</p>
+                    <h3 class="product-title">AVN Ultra HD HDMI Cable</h3>
+                    <div class="product-price">
+                        <span class="current-price">$49.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="rating-count">(64)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>AVN Electronics</h3>
+                <p>Innovating the future of home entertainment and smart technology since 2010.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="smarttvs.html">Smart TVs</a></li>
+                    <li><a href="audio.html">Audio Systems</a></li>
+                    <li><a href="smarthome.html">Smart Home</a></li>
+                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="deals.html">Deals</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="shippingpolicy.html">Shipping Policy</a></li>
+                    <li><a href="warranty.html">Returns & Warranty</a></li>
+                    <li><a href="manual.html">Product Manuals</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="press.html">Press</a></li>
+                    <li><a href="investors.html">Investors</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 AVN Electronics. All rights reserved. | <a href="privacypolicy.html">Privacy Policy</a> | <a href="termsofservice.html">Terms of Service</a></p>
+        </div>
+    </footer>
+
+
+
+
+
+<script src="shop.js"></script>
+</body>
+</html>
