@@ -35,6 +35,7 @@ header {
     top: 0;
     z-index: 1000;
     padding: 1rem 2rem;
+    transition: var(--transition);
 }
 
 .navbar {
@@ -267,6 +268,8 @@ header {
     padding: 8rem 2rem 4rem;
     max-width: 1400px;
     margin: 0 auto;
+    position: relative;
+    overflow: hidden;
 }
 
 .swiper {
@@ -368,8 +371,6 @@ header {
 .section-title {
     text-align: center;
     margin-bottom: 3rem;
-    opacity: 0;
-    transform: translateY(20px);
 }
 
 .section-title h2 {
@@ -397,8 +398,6 @@ header {
     box-shadow: var(--shadow);
     text-align: center;
     transition: var(--transition);
-    opacity: 0;
-    transform: translateY(20px);
 }
 
 .feature-card:hover {
@@ -435,8 +434,6 @@ header {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
-    opacity: 0;
-    transform: translateY(20px);
 }
 
 .products-header h2 {
@@ -469,8 +466,6 @@ header {
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: var(--transition);
-    opacity: 0;
-    transform: translateY(20px);
 }
 
 .product-card:hover {
@@ -602,8 +597,6 @@ header {
     border-radius: 1rem;
     margin-top: 3rem;
     margin-bottom: 3rem;
-    opacity: 0;
-    transform: translateY(20px);
 }
 
 .newsletter h2 {
@@ -728,12 +721,6 @@ footer {
     text-align: center;
     color: var(--gray);
     font-size: 0.9rem;
-}
-
-/* Animations */
-.animate {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 /* Mobile Menu */
@@ -931,4 +918,39 @@ footer {
     .newsletter h2 {
         font-size: 1.8rem;
     }
+}
+
+/* Animation classes */
+.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateY(20px);
+    transition: all 1s;
+}
+
+.show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+}
+
+/* Staggered animations */
+.feature-card:nth-child(2) {
+    transition-delay: 200ms;
+}
+
+.feature-card:nth-child(3) {
+    transition-delay: 400ms;
+}
+
+.product-card:nth-child(2) {
+    transition-delay: 200ms;
+}
+
+.product-card:nth-child(3) {
+    transition-delay: 400ms;
+}
+
+.product-card:nth-child(4) {
+    transition-delay: 600ms;
 }
