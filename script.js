@@ -1,199 +1,188 @@
-// Initialize Swiper
-const swiper = new Swiper('.swiper', {
-    loop: true,
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-    },
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
-});
-
 // Mobile Menu Toggle
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const mobileMenu = document.querySelector('.mobile-menu');
 const closeMenuBtn = document.querySelector('.close-menu');
-const overlay = document.querySelector('.overlay');
+const overlay = document.createElement('div');
+overlay.className = 'overlay';
+document.body.appendChild(overlay);
 
 mobileMenuBtn.addEventListener('click', () => {
     mobileMenu.classList.add('active');
-    overlay.classList.add('active');
+    overlay.style.display = 'block';
     document.body.style.overflow = 'hidden';
 });
 
 closeMenuBtn.addEventListener('click', () => {
     mobileMenu.classList.remove('active');
-    overlay.classList.remove('active');
+    overlay.style.display = 'none';
     document.body.style.overflow = '';
 });
 
 overlay.addEventListener('click', () => {
     mobileMenu.classList.remove('active');
-    overlay.classList.remove('active');
+    overlay.style.display = 'none';
     document.body.style.overflow = '';
 });
 
-// Initialize GSAP animations
-gsap.registerPlugin(ScrollTrigger);
+// Mobile Submenu Toggle
+const mobileDropdowns = document.querySelectorAll('.mobile-menu-dropdown > a');
 
-// Animate elements on scroll
-gsap.utils.toArray('.hidden').forEach((element) => {
-    gsap.from(element, {
-        scrollTrigger: {
-            trigger: element,
-            start: "top 80%",
-            toggleActions: "play none none none"
-        },
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        ease: "power2.out"
-    });
-});
-
-// More advanced animations for specific sections
-// Features section animation
-gsap.from(".feature-card", {
-    scrollTrigger: {
-        trigger: ".features",
-        start: "top 70%",
-        toggleActions: "play none none none"
-    },
-    opacity: 0,
-    y: 50,
-    duration: 0.8,
-    stagger: 0.2,
-    ease: "back.out(1)"
-});
-
-// Products section animation
-gsap.from(".product-card", {
-    scrollTrigger: {
-        trigger: ".products",
-        start: "top 70%",
-        toggleActions: "play none none none"
-    },
-    opacity: 0,
-    y: 50,
-    duration: 0.8,
-    stagger: 0.15,
-    ease: "power2.out"
-});
-
-// Newsletter animation
-gsap.from(".newsletter", {
-    scrollTrigger: {
-        trigger: ".newsletter",
-        start: "top 80%",
-        toggleActions: "play none none none"
-    },
-    opacity: 0,
-    y: 50,
-    duration: 1,
-    ease: "elastic.out(1, 0.5)"
-});
-
-// Header animation on scroll
-gsap.to("header", {
-    scrollTrigger: {
-        trigger: "body",
-        start: "50px top",
-        toggleActions: "play none none none"
-    },
-    backgroundColor: "rgba(255,255,255,0.9)",
-    backdropFilter: "blur(10px)",
-    duration: 0.5,
-    ease: "power2.out"
-});
-
-// Search Functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const searchForm = document.getElementById('header-search-form');
-    const searchInput = document.getElementById('header-search-input');
-    const searchBtn = document.querySelector('.header-search-btn');
-    const suggestionsContainer = document.querySelector('.search-suggestions');
-    const header = document.querySelector('header');
-
-    // Sample product data (replace with your actual data or API call)
-    const products = [
-        { id: 1, name: "Quantum X Series TV", model: "QX-65UHD", category: "Smart TVs", image: "https://via.placeholder.com/150" },
-        { id: 2, name: "Crystal 4K HDR TV", model: "CR-55HDR", category: "Smart TVs", image: "https://via.placeholder.com/150" },
-        { id: 3, name: "Surround 7.1 Audio System", model: "SR-7100", category: "Audio", image: "https://via.placeholder.com/150" },
-        { id: 4, name: "SoundBar Pro", model: "SB-PRO32", category: "Audio", image: "https://via.placeholder.com/150" },
-        { id: 5, name: "Smart Hub", model: "SH-CONTROL", category: "Smart Home", image: "https://via.placeholder.com/150" }
-    ];
-
-    // Toggle search on mobile
-    searchBtn.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768) {
-            e.preventDefault();
-            header.classList.toggle('mobile-search-active');
-            if (header.classList.contains('mobile-search-active')) {
-                searchInput.focus();
-            }
-        }
-    });
-
-    // Handle search input
-    searchInput.addEventListener('input', function() {
-        const term = this.value.trim().toLowerCase();
-        showSuggestions(term);
-    });
-
-    // Handle form submission
-    searchForm.addEventListener('submit', function(e) {
+mobileDropdowns.forEach(dropdown => {
+    dropdown.addEventListener('click', (e) => {
         e.preventDefault();
-        const term = searchInput.value.trim();
-        if (term) {
-            window.location.href = `/search.html?q=${encodeURIComponent(term)}`;
-        }
+        const submenu = dropdown.nextElementSibling;
+        submenu.classList.toggle('active');
+        dropdown.querySelector('i').classList.toggle('fa-chevron-up');
     });
+});
 
-    // Show search suggestions
-    function showSuggestions(term) {
-        if (term.length < 2) {
-            suggestionsContainer.style.display = 'none';
-            return;
-        }
+// Search Toggle
+const searchToggle = document.querySelector('.search-toggle');
+const searchBox = document.querySelector('.search-box');
 
-        const filtered = products.filter(product => 
-            product.name.toLowerCase().includes(term) || 
-            product.model.toLowerCase().includes(term) ||
-            product.category.toLowerCase().includes(term)
-        );
+searchToggle.addEventListener('click', () => {
+    searchBox.style.display = searchBox.style.display === 'block' ? 'none' : 'block';
+});
 
-        if (filtered.length > 0) {
-            suggestionsContainer.innerHTML = filtered.map(product => `
-                <div class="search-suggestion-item" data-id="${product.id}">
-                    <img src="${product.image}" alt="${product.name}">
-                    <div class="suggestion-text">
-                        <h4>${product.name}</h4>
-                        <p>${product.model} • ${product.category}</p>
-                    </div>
-                </div>
-            `).join('');
-
-            suggestionsContainer.style.display = 'block';
-            
-            // Add click handlers to suggestions
-            document.querySelectorAll('.search-suggestion-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const productId = this.getAttribute('data-id');
-                    window.location.href = `/product.html?id=${productId}`;
-                });
-            });
-        } else {
-            suggestionsContainer.innerHTML = '<div class="search-suggestion-item">No results found</div>';
-            suggestionsContainer.style.display = 'block';
-        }
+// Close search box when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-container')) {
+        searchBox.style.display = 'none';
     }
+});
 
-    // Close suggestions when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.header-search-container')) {
-            suggestionsContainer.style.display = 'none';
+// Header Scroll Effect
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+
+// Quick View Modal
+const quickViewBtns = document.querySelectorAll('.quick-view-btn');
+const modal = document.getElementById('quickViewModal');
+const closeModal = document.querySelector('.close-modal');
+
+quickViewBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const productCard = btn.closest('.product-card');
+        const productImage = productCard.querySelector('.product-image img').src;
+        const productTitle = productCard.querySelector('.product-title').textContent;
+        const currentPrice = productCard.querySelector('.current-price').textContent;
+        const originalPrice = productCard.querySelector('.original-price')?.textContent || '';
+        const ratingStars = productCard.querySelector('.stars').innerHTML;
+        const ratingCount = productCard.querySelector('.rating-count').textContent;
+        
+        modal.querySelector('.modal-product-image img').src = productImage;
+        modal.querySelector('.product-title').textContent = productTitle;
+        modal.querySelector('.current-price').textContent = currentPrice;
+        modal.querySelector('.original-price').textContent = originalPrice;
+        modal.querySelector('.stars').innerHTML = ratingStars;
+        modal.querySelector('.rating-count').textContent = ratingCount;
+        
+        // Sample product description
+        modal.querySelector('.product-description').textContent = 
+            `The ${productTitle} delivers exceptional performance with cutting-edge technology. ` +
+            `Designed for the modern home, it offers seamless integration and stunning visuals.`;
+        
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+closeModal.addEventListener('click', () => {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+});
+
+// Quantity Selector
+const quantityMinus = document.querySelector('.quantity-btn.minus');
+const quantityPlus = document.querySelector('.quantity-btn.plus');
+const quantityInput = document.querySelector('.quantity-selector input');
+
+quantityMinus.addEventListener('click', () => {
+    let value = parseInt(quantityInput.value);
+    if (value > 1) {
+        quantityInput.value = value - 1;
+    }
+});
+
+quantityPlus.addEventListener('click', () => {
+    let value = parseInt(quantityInput.value);
+    quantityInput.value = value + 1;
+});
+
+// Color Selection
+const colorOptions = document.querySelectorAll('.color-option');
+
+colorOptions.forEach(option => {
+    option.addEventListener('click', () => {
+        colorOptions.forEach(opt => opt.classList.remove('selected'));
+        option.classList.add('selected');
+    });
+});
+
+// Add to Cart Functionality
+const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
+const cartCount = document.querySelector('.cart-count');
+
+addToCartBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        let count = parseInt(cartCount.textContent);
+        cartCount.textContent = count + 1;
+        
+        // Add animation to cart icon
+        const cartBtn = document.querySelector('.cart-btn');
+        cartBtn.classList.add('animate');
+        setTimeout(() => {
+            cartBtn.classList.remove('animate');
+        }, 500);
+    });
+});
+
+// Wishlist Toggle
+const wishlistBtns = document.querySelectorAll('.wishlist-btn');
+
+wishlistBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const icon = btn.querySelector('i');
+        if (icon.classList.contains('far')) {
+            icon.classList.remove('far');
+            icon.classList.add('fas');
+            icon.style.color = 'var(--red)';
+        } else {
+            icon.classList.remove('fas');
+            icon.classList.add('far');
+            icon.style.color = '';
         }
     });
 });
+
+// Initialize Swiper for testimonials if needed
+// const swiper = new Swiper('.testimonials-slider', {
+//     loop: true,
+//     slidesPerView: 1,
+//     spaceBetween: 30,
+//     pagination: {
+//         el: '.swiper-pagination',
+//         clickable: true,
+//     },
+//     breakpoints: {
+//         768: {
+//             slidesPerView: 2,
+//         },
+//         992: {
+//             slidesPerView: 3,
+//         }
+//     }
+// });
