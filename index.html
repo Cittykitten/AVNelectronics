@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AVN Electronics - Premium Audio-Visual & Smart Home Technology</title>
+    <title>AVN Electronics - Premium Home Entertainment</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,7 +17,7 @@
             </a>
 
             <div class="nav-links">
-                <a href="index.html">Home</a>
+                <a href="index.html" class="active">Home</a>
                 <a href="shop.html">Shop</a>
                 <a href="categories.html">Categories</a>
                 <a href="deals.html">Deals</a>
@@ -27,20 +26,11 @@
             </div>
 
             <div class="nav-actions">
-                <div class="header-search-container">
-                    <form id="header-search-form" class="header-search-form">
-                        <input type="text" id="header-search-input" class="header-search-input" 
-                            placeholder="Search products..." autocomplete="off">
-                        <button type="submit" class="header-search-btn">
-                            <i class="fas fa-search"></i>
-                        </button>
-                        <div class="search-suggestions"></div>
-                    </form>
-                </div>
+                <i class="fas fa-search"></i>
                 <i class="fas fa-user"></i>
                 <div class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count">3</span>
+                    <span class="cart-count">0</span>
                 </div>
                 <button class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
@@ -52,7 +42,7 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu">
         <div class="mobile-menu-header">
-            <a href="#" class="logo">
+            <a href="index.html" class="logo">
                 <i class="fas fa-tv"></i>
                 <span>AVN Electronics</span>
             </a>
@@ -62,7 +52,7 @@
         </div>
 
         <ul class="mobile-nav-links">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html" class="active">Home</a></li>
             <li><a href="shop.html">Shop</a></li>
             <li><a href="categories.html">Categories</a></li>
             <li><a href="deals.html">Deals</a></li>
@@ -77,228 +67,265 @@
     </div>
     <div class="overlay"></div>
 
-    <!-- Hero Carousel -->
-    <section class="hero">
-        <div class="swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80" loading="lazy" alt="Smart TV">
-                    <div class="slide-content">
-                        <h2>Experience the Future of Entertainment</h2>
-                        <p>Discover our latest 8K OLED TVs with AI-powered picture quality and immersive sound.</p>
-                        <a href="#" class="btn">Shop Now</a>
-                        <a href="#" class="btn btn-outline">Learn More</a>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80" loading="lazy" alt="Home Theater">
-                    <div class="slide-content">
-                        <h2>Premium Sound Systems</h2>
-                        <p>Transform your living space with our Dolby Atmos surround sound systems.</p>
-                        <a href="#" class="btn">Shop Now</a>
-                        <a href="#" class="btn btn-outline">Learn More</a>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://images.unsplash.com/photo-1558002038-1055907df827?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80" loading="lazy" alt="Smart Home">
-                    <div class="slide-content">
-                        <h2>Smart Home Solutions</h2>
-                        <p>Control your entire home with our integrated smart home technology.</p>
-                        <a href="shop.html" class="btn">Shop Now</a>
-                        <a href="#" class="btn btn-outline">Learn More</a>
-                    </div>
-                </div>
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be added here dynamically -->
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>Your cart is empty</h3>
+                <p>Start shopping to add items to your cart</p>
             </div>
-            <div class="swiper-pagination"></div>
+        </div>
+        <div class="cart-total" style="display: none;">
+            <div class="cart-total-row">
+                <span>Subtotal:</span>
+                <span class="subtotal">$0.00</span>
+            </div>
+            <div class="cart-total-row">
+                <span>Shipping:</span>
+                <span>Free</span>
+            </div>
+            <div class="cart-total-row">
+                <span>Total:</span>
+                <span class="total">$0.00</span>
+            </div>
+        </div>
+        <button class="checkout-btn" style="display: none;">
+            <i class="fas fa-credit-card"></i>
+            Proceed to Checkout
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Premium Home Entertainment</h1>
+            <p>Experience the future of technology with AVN's cutting-edge electronics</p>
+            <div class="hero-buttons">
+                <a href="shop.html" class="btn btn-primary">Shop Now</a>
+                <a href="deals.html" class="btn btn-outline">View Deals</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="images/hero-tv.png" alt="AVN Premium Smart TV">
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features">
-        <div class="section-title hidden">
-            <h2>Why Choose AVN Electronics?</h2>
-            <p>We provide cutting-edge technology with exceptional customer service to enhance your digital lifestyle.</p>
-        </div>
-
-        <div class="features-grid">
-            <div class="feature-card hidden">
-                <div class="feature-icon">
-                    <i class="fas fa-shield-alt"></i>
+    <!-- Featured Categories -->
+    <section class="featured-categories">
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="categories-grid">
+            <a href="smarttvs.html" class="category-card">
+                <div class="category-image">
+                    <img src="images/category-tv.jpg" alt="Smart TVs">
                 </div>
-                <h3>2-Year Warranty</h3>
-                <p>All our products come with a comprehensive 2-year warranty for your peace of mind.</p>
-            </div>
-            <div class="feature-card hidden">
-                <div class="feature-icon">
-                    <i class="fas fa-truck"></i>
+                <h3>Smart TVs</h3>
+            </a>
+            <a href="audio.html" class="category-card">
+                <div class="category-image">
+                    <img src="images/category-audio.jpg" alt="Audio Systems">
                 </div>
-                <h3>Free Shipping</h3>
-                <p>Enjoy free shipping on all orders over $50 with delivery within 2-3 business days.</p>
-            </div>
-            <div class="feature-card hidden">
-                <div class="feature-icon">
-                    <i class="fas fa-headset"></i>
+                <h3>Audio Systems</h3>
+            </a>
+            <a href="smarthome.html" class="category-card">
+                <div class="category-image">
+                    <img src="images/category-smart-home.jpg" alt="Smart Home">
                 </div>
-                <h3>24/7 Support</h3>
-                <p>Our expert support team is available round the clock to assist you with any queries.</p>
-            </div>
+                <h3>Smart Home</h3>
+            </a>
+            <a href="accessories.html" class="category-card">
+                <div class="category-image">
+                    <img src="images/category-accessories.jpg" alt="Accessories">
+                </div>
+                <h3>Accessories</h3>
+            </a>
         </div>
     </section>
 
     <!-- Featured Products -->
-    <section class="products">
-        <div class="products-header hidden">
-            <h2>Featured Products</h2>
-            <a href="#" class="view-all">
-                View All
-                <i class="fas fa-arrow-right"></i>
-            </a>
+    <section class="featured-products">
+        <div class="section-header">
+            <h2 class="section-title">Featured Products</h2>
+            <a href="shop.html" class="view-all">View All</a>
         </div>
-
         <div class="products-grid">
-            <div class="product-card hidden">
+            <!-- Product 1 -->
+            <div class="product-card">
                 <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1589&q=80" loading="lazy" alt="AVN-X1 Smart TV">
+                    <img src="images/10706485.png" loading="lazy" alt="AVN-X1 Smart TV">
                     <span class="product-badge">Sale</span>
-                    <div class="product-actions">
-                        <div class="product-action-btn">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <div class="product-action-btn">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <div class="product-action-btn">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                    </div>
                 </div>
                 <div class="product-info">
-                    <p class="product-category">Smart TVs</p>
                     <h3 class="product-title">AVN-X1 Ultra HD Smart TV</h3>
                     <div class="product-price">
                         <span class="current-price">$899.99</span>
                         <span class="old-price">$1,199.99</span>
                     </div>
-                    <div class="product-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                        <span class="rating-count">(142)</span>
-                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
                 </div>
             </div>
 
-            <div class="product-card hidden">
+            <!-- Product 2 -->
+            <div class="product-card">
                 <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1545454675-3531b543be5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1589&q=80" loading="lazy" alt="SoundBeam Pro">
-                    <div class="product-actions">
-                        <div class="product-action-btn">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <div class="product-action-btn">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <div class="product-action-btn">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                    </div>
+                    <img src="images/2301.i518.021.S.m005.c13.isometric sound speakers.jpg" loading="lazy" alt="SoundBeam Pro">
                 </div>
                 <div class="product-info">
-                    <p class="product-category">Audio Systems</p>
                     <h3 class="product-title">AVN SoundBeam Pro</h3>
                     <div class="product-price">
                         <span class="current-price">$349.99</span>
                     </div>
-                    <div class="product-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span class="rating-count">(89)</span>
-                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
                 </div>
             </div>
 
-            <div class="product-card hidden">
+            <!-- Product 3 -->
+            <div class="product-card">
                 <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1589&q=80" loading="lazy" alt="SmartHub">
+                    <img src="images/Screenshot_2025-06-17_115327-removebg-preview.png" loading="lazy" alt="SmartHub">
                     <span class="product-badge">New</span>
-                    <div class="product-actions">
-                        <div class="product-action-btn">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <div class="product-action-btn">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <div class="product-action-btn">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                    </div>
                 </div>
                 <div class="product-info">
-                    <p class="product-category">Smart Home</p>
                     <h3 class="product-title">AVN SmartHub</h3>
                     <div class="product-price">
                         <span class="current-price">$199.99</span>
                     </div>
-                    <div class="product-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <span class="rating-count">(47)</span>
-                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
                 </div>
             </div>
 
-            <div class="product-card hidden">
+            <!-- Product 4 -->
+            <div class="product-card">
                 <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1589&q=80" loading="lazy" alt="Wireless Earbuds">
+                    <img src="images/Screenshot_2025-06-17_120404-removebg-preview.png" loading="lazy" alt="Wireless Earbuds">
                     <span class="product-badge">Popular</span>
-                    <div class="product-actions">
-                        <div class="product-action-btn">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <div class="product-action-btn">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <div class="product-action-btn">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                    </div>
                 </div>
                 <div class="product-info">
-                    <p class="product-category">Audio</p>
                     <h3 class="product-title">AVN AirBuds Pro</h3>
                     <div class="product-price">
                         <span class="current-price">$129.99</span>
                         <span class="old-price">$159.99</span>
                     </div>
-                    <div class="product-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                        <span class="rating-count">(216)</span>
-                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banner Section -->
+    <section class="banner">
+        <div class="banner-content">
+            <h2>Summer Sale - Up to 40% Off</h2>
+            <p>Limited time offer on select AVN products</p>
+            <a href="deals.html" class="btn btn-white">Shop the Sale</a>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-choose-us">
+        <h2 class="section-title">Why Choose AVN Electronics</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>5-Year Warranty</h3>
+                <p>Industry-leading warranty on all our products</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-truck"></i>
+                <h3>Free Shipping</h3>
+                <p>On all orders over $100</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-headset"></i>
+                <h3>24/7 Support</h3>
+                <p>Dedicated customer service team</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-undo"></i>
+                <h3>Easy Returns</h3>
+                <p>30-day money back guarantee</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"The AVN-X1 Smart TV exceeded all my expectations. The picture quality is stunning and the smart features work flawlessly."</p>
+                <div class="testimonial-author">
+                    <img src="images/customer1.jpg" alt="Sarah J.">
+                    <span>Sarah J.</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"I've never heard such clear audio before. The SoundBeam Pro transformed my home theater experience."</p>
+                <div class="testimonial-author">
+                    <img src="images/customer2.jpg" alt="Michael T.">
+                    <span>Michael T.</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="testimonial-text">"Excellent customer service when I had questions about setup. The team went above and beyond to help me."</p>
+                <div class="testimonial-author">
+                    <img src="images/customer3.jpg" alt="Lisa M.">
+                    <span>Lisa M.</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Newsletter -->
-    <section class="newsletter hidden">
-        <h2>Subscribe to Our Newsletter</h2>
-        <p>Stay updated with our latest products, exclusive deals, and tech news.</p>
-        <form class="newsletter-form">
-            <input type="email" placeholder="Enter your email address" required>
-            <button type="submit">Subscribe</button>
-        </form>
+    <section class="newsletter">
+        <div class="newsletter-content">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for the latest products and exclusive deals</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
     </section>
 
     <!-- Footer -->
@@ -350,11 +377,6 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
-<!--     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script> -->
-    <!-- GSAP Library -->
-<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script> -->
-<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script> -->
     <script src="script.js"></script>
 </body>
 </html>
