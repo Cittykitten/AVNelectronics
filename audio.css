@@ -1,1 +1,87 @@
+/* Audio Technology Section */
+.audio-technology {
+    background-color: var(--dark);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+}
 
+.audio-technology h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.audio-technology p {
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    opacity: 0.8;
+}
+
+.technology-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tech-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    transition: var(--transition);
+}
+
+.tech-card:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.tech-card i {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+.tech-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.tech-card p {
+    font-size: 1rem;
+    margin-bottom: 0;
+    opacity: 0.8;
+}
+
+/* Audio Product Badges */
+.product-badge {
+    background-color: var(--primary);
+}
+
+.product-badge.sale {
+    background-color: var(--red);
+}
+
+.product-badge.new {
+    background-color: #10b981;
+}
+
+.product-badge.premium {
+    background-color: #f59e0b;
+}
+
+/* Audio Page Specific Responsive */
+@media (max-width: 768px) {
+    .audio-technology h2 {
+        font-size: 2rem;
+    }
+    
+    .audio-technology p {
+        font-size: 1rem;
+    }
+    
+    .tech-card {
+        padding: 1.5rem;
+    }
+}
