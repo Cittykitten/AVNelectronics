@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Systems - AVN Electronics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-tv"></i>
+                <span>AVN Electronics</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="categories.html">Categories</a>
+                <a href="audio.html" class="active">Audio</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-user"></i>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">
+                <i class="fas fa-tv"></i>
+                <span>AVN Electronics</span>
+            </a>
+            <button class="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="audio.html" class="active">Audio</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="mobile-nav-actions">
+            <a href="#" class="btn">Login</a>
+            <a href="#" class="btn btn-outline">Register</a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be added here dynamically -->
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>Your cart is empty</h3>
+                <p>Start shopping to add items to your cart</p>
+            </div>
+        </div>
+        <div class="cart-total" style="display: none;">
+            <div class="cart-total-row">
+                <span>Subtotal:</span>
+                <span class="subtotal">$0.00</span>
+            </div>
+            <div class="cart-total-row">
+                <span>Shipping:</span>
+                <span>Free</span>
+            </div>
+            <div class="cart-total-row">
+                <span>Total:</span>
+                <span class="total">$0.00</span>
+            </div>
+        </div>
+        <button class="checkout-btn" style="display: none;">
+            <i class="fas fa-credit-card"></i>
+            Proceed to Checkout
+        </button>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span class="notification-message">Product added to cart</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="shop-container">
+        <div class="products-header">
+            <h1>Premium Audio Systems</h1>
+            <div class="sort-options">
+                <span>Sort by:</span>
+                <select id="sort-products">
+                    <option value="featured">Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="name-asc">Name: A-Z</option>
+                    <option value="name-desc">Name: Z-A</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Sidebar Filters -->
+        <aside class="sidebar">
+            <div class="filter-group">
+                <h3>Audio Categories</h3>
+                <ul class="filter-options">
+                    <li>
+                        <label>
+                            <input type="checkbox" name="category" value="headphones" checked>
+                            Headphones
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="category" value="speakers" checked>
+                            Speakers
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="category" value="soundbars" checked>
+                            Soundbars
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="category" value="earbuds" checked>
+                            Earbuds
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="category" value="home-theater" checked>
+                            Home Theater
+                        </label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="filter-group">
+                <h3>Price Range</h3>
+                <input type="range" class="price-range" min="0" max="2000" value="2000" step="50">
+                <div class="price-values">
+                    <span>$0</span>
+                    <span>$2000</span>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Brand</h3>
+                <ul class="filter-options">
+                    <li>
+                        <label>
+                            <input type="checkbox" name="brand" value="avn" checked>
+                            AVN
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="brand" value="sony" checked>
+                            Sony
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="brand" value="bose" checked>
+                            Bose
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="brand" value="sennheiser" checked>
+                            Sennheiser
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="brand" value="jbl" checked>
+                            JBL
+                        </label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="filter-group">
+                <h3>Features</h3>
+                <ul class="filter-options">
+                    <li>
+                        <label>
+                            <input type="checkbox" name="feature" value="wireless" checked>
+                            Wireless
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="feature" value="noise-cancelling" checked>
+                            Noise Cancelling
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="feature" value="waterproof" checked>
+                            Waterproof
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="feature" value="bluetooth" checked>
+                            Bluetooth
+                        </label>
+                    </li>
+                </ul>
+            </div>
+
+            <button class="filter-btn">Apply Filters</button>
+        </aside>
+
+        <!-- Products Grid -->
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card" data-category="headphones" data-brand="avn" data-price="349.99" data-feature="wireless noise-cancelling">
+                <div class="product-image">
+                    <img src="images/audio/avn-headphones-pro.jpg" loading="lazy" alt="AVN Headphones Pro">
+                    <span class="product-badge">Best Seller</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Headphones</p>
+                    <h3 class="product-title">AVN Headphones Pro</h3>
+                    <div class="product-price">
+                        <span class="current-price">$349.99</span>
+                        <span class="old-price">$399.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="rating-count">(428)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card" data-category="earbuds" data-brand="avn" data-price="129.99" data-feature="wireless bluetooth waterproof">
+                <div class="product-image">
+                    <img src="images/audio/avn-airbuds-pro.jpg" loading="lazy" alt="AVN AirBuds Pro">
+                    <span class="product-badge">New</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Earbuds</p>
+                    <h3 class="product-title">AVN AirBuds Pro</h3>
+                    <div class="product-price">
+                        <span class="current-price">$129.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="rating-count">(196)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card" data-category="soundbars" data-brand="avn" data-price="499.99" data-feature="wireless bluetooth">
+                <div class="product-image">
+                    <img src="images/audio/avn-soundbar-ultra.jpg" loading="lazy" alt="AVN Soundbar Ultra">
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Soundbar</p>
+                    <h3 class="product-title">AVN Soundbar Ultra</h3>
+                    <div class="product-price">
+                        <span class="current-price">$499.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="rating-count">(312)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card" data-category="speakers" data-brand="avn" data-price="199.99" data-feature="wireless bluetooth waterproof">
+                <div class="product-image">
+                    <img src="images/audio/avn-blast-speaker.jpg" loading="lazy" alt="AVN Blast Speaker">
+                    <span class="product-badge">Sale</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Speaker</p>
+                    <h3 class="product-title">AVN Blast Speaker</h3>
+                    <div class="product-price">
+                        <span class="current-price">$199.99</span>
+                        <span class="old-price">$249.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="rating-count">(542)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card" data-category="home-theater" data-brand="avn" data-price="899.99" data-feature="wireless">
+                <div class="product-image">
+                    <img src="images/audio/avn-home-theater.jpg" loading="lazy" alt="AVN Home Theater System">
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Home Theater</p>
+                    <h3 class="product-title">AVN Home Theater System</h3>
+                    <div class="product-price">
+                        <span class="current-price">$899.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="rating-count">(87)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card" data-category="headphones" data-brand="sony" data-price="379.99" data-feature="wireless noise-cancelling">
+                <div class="product-image">
+                    <img src="images/audio/sony-wh-1000xm5.jpg" loading="lazy" alt="Sony WH-1000XM5">
+                    <span class="product-badge">Premium</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Headphones</p>
+                    <h3 class="product-title">Sony WH-1000XM5</h3>
+                    <div class="product-price">
+                        <span class="current-price">$379.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="rating-count">(1,245)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card" data-category="earbuds" data-brand="bose" data-price="279.99" data-feature="wireless noise-cancelling waterproof">
+                <div class="product-image">
+                    <img src="images/audio/bose-quietcomfort.jpg" loading="lazy" alt="Bose QuietComfort Earbuds">
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Earbuds</p>
+                    <h3 class="product-title">Bose QuietComfort Earbuds</h3>
+                    <div class="product-price">
+                        <span class="current-price">$279.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="rating-count">(876)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="product-card" data-category="speakers" data-brand="jbl" data-price="129.99" data-feature="wireless bluetooth waterproof">
+                <div class="product-image">
+                    <img src="images/audio/jbl-flip-6.jpg" loading="lazy" alt="JBL Flip 6">
+                    <span class="product-badge">Popular</span>
+                    <div class="product-actions">
+                        <div class="product-action-btn favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="product-action-btn">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Speaker</p>
+                    <h3 class="product-title">JBL Flip 6</h3>
+                    <div class="product-price">
+                        <span class="current-price">$129.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="rating-count">(1,542)</span>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </main>
+
+    <!-- Audio Technology Section -->
+    <section class="audio-technology">
+        <div class="section-content">
+            <h2>Premium Audio Technology</h2>
+            <p>Experience crystal-clear sound with our advanced audio technologies</p>
+            <div class="technology-grid">
+                <div class="tech-card">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>Hi-Res Audio</h3>
+                    <p>Studio-quality sound that brings you closer to the original performance</p>
+                </div>
+                <div class="tech-card">
+                    <i class="fas fa-headphones"></i>
+                    <h3>Active Noise Cancellation</h3>
+                    <p>Block out distractions and immerse yourself in your music</p>
+                </div>
+                <div class="tech-card">
+                    <i class="fas fa-bluetooth"></i>
+                    <h3>Bluetooth 5.2</h3>
+                    <p>Stable, high-quality wireless connection with extended range</p>
+                </div>
+                <div class="tech-card">
+                    <i class="fas fa-tint"></i>
+                    <h3>Waterproof Design</h3>
+                    <p>IPX7 rated protection against water and sweat</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>AVN Electronics</h3>
+                <p>Innovating the future of home entertainment and smart technology since 2010.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="smarttvs.html">Smart TVs</a></li>
+                    <li><a href="audio.html">Audio Systems</a></li>
+                    <li><a href="smarthome.html">Smart Home</a></li>
+                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="deals.html">Deals</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="shippingpolicy.html">Shipping Policy</a></li>
+                    <li><a href="warranty.html">Returns & Warranty</a></li>
+                    <li><a href="manual.html">Product Manuals</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="press.html">Press</a></li>
+                    <li><a href="investors.html">Investors</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 AVN Electronics. All rights reserved. | <a href="privacypolicy.html">Privacy Policy</a> | <a href="termsofservice.html">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="audio.js"></script>
+</body>
+</html>
